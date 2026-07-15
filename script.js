@@ -10,7 +10,7 @@
    ★★ 여기에 배포한 Apps Script 웹앱 URL을 붙여넣으세요 ★★
    (README의 ③~④ 단계 참고. 아래 문자열만 바꾸면 됩니다.)
    --------------------------------------------------------- */
-const APPS_SCRIPT_URL = "여기에_배포_URL";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGmToUEP1WTbtxBFhO6uSwIGgnjkZcaeTHSj4UwIpYQwFXmhJEfvXq5bI8WIAH9bVu2A/exec";
 
 /* ----- MBTI 16종 목록 ----- */
 const MBTI_TYPES = [
