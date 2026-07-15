@@ -1,1 +1,191 @@
-<h1> 메인 페이지야! </h1>
+<!--
+  =========================================================
+  언젠가, 제주 — 감귤나무에 열리는 소원
+  ---------------------------------------------------------
+  · 순수 HTML/CSS/JavaScript 정적 사이트 (프레임워크 없음)
+  · 방문자가 남긴 소원을 Google 스프레드시트에 저장/조회
+  · 감귤나무에 감귤 = 소원 1개
+  · 학교 수업 제출용 프로젝트
+  =========================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <!-- 모바일 반응형을 위한 뷰포트 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="언젠가 제주에 가면 하고 싶은 일을 감귤나무에 남겨보세요." />
+  <title>언젠가, 제주 🍊</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== 배경: 제주의 맑은 하늘·바다 (CSS 그라디언트 + SVG 파도) ===== -->
+  <div class="sky-bg" aria-hidden="true">
+    <!-- 두둥실 떠다니는 구름 (CSS로 그림) -->
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <!-- 은은하게 빛나는 해 -->
+    <div class="sun"></div>
+    <!-- 바다 (아래쪽 물결) -->
+    <div class="sea">
+      <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C240,90 480,0 720,40 C960,80 1200,10 1440,50 L1440,120 L0,120 Z" />
+      </svg>
+      <svg class="wave wave--back" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 C240,20 480,100 720,60 C960,20 1200,90 1440,50 L1440,120 L0,120 Z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- ===== 상단 타이틀 영역 ===== -->
+  <header class="hero">
+    <h1 class="hero__title">언젠가, 제주</h1>
+    <p class="hero__subtitle">아직 가보지 못한 그곳에, 마음을 먼저 보냅니다</p>
+    <p class="hero__count" id="wishCount">지금까지 <strong>0</strong>개의 소원이 열렸어요</p>
+  </header>
+
+  <!-- ===== MBTI 필터 ===== -->
+  <section class="filter" aria-label="MBTI 필터">
+    <label class="filter__label" for="filterMbti">같은 MBTI만 반짝이게</label>
+    <select id="filterMbti" class="filter__select">
+      <option value="">전체 보기</option>
+      <!-- MBTI 16종은 script.js에서 자동으로 채워집니다 -->
+    </select>
+    <button type="button" id="filterReset" class="filter__reset">초기화</button>
+  </section>
+
+  <!-- ===== 가운데: 감귤나무 + 돌하르방 무대 ===== -->
+  <main class="stage">
+
+    <!-- 로딩 상태 -->
+    <div class="state state--loading" id="stateLoading">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>감귤나무를 불러오는 중…</p>
+    </div>
+
+    <!-- 에러 상태 -->
+    <div class="state state--error is-hidden" id="stateError">
+      <p>🍂 소원을 불러오지 못했어요.</p>
+      <button type="button" id="retryBtn" class="btn btn--ghost">다시 시도</button>
+    </div>
+
+    <!-- 빈 상태 (소원이 하나도 없을 때) -->
+    <div class="state state--empty is-hidden" id="stateEmpty">
+      <p>아직 열린 감귤이 하나도 없어요.<br />첫 번째 소원을 남겨보세요 🍊</p>
+    </div>
+
+    <!-- 감귤나무 무대 본체 -->
+    <div class="scene is-hidden" id="scene">
+
+      <!-- 감귤나무 (SVG로 직접 그림) -->
+      <svg class="tree" viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="감귤나무">
+        <!-- 나무 그늘 (땅) -->
+        <ellipse cx="150" cy="345" rx="110" ry="14" fill="rgba(20,80,70,0.18)" />
+        <!-- 줄기 -->
+        <path d="M138,345 C140,300 132,250 150,215 C168,250 160,300 162,345 Z" fill="#8a5a34" />
+        <path d="M150,240 C150,220 132,205 120,196" stroke="#8a5a34" stroke-width="9" fill="none" stroke-linecap="round" />
+        <path d="M150,235 C150,215 172,202 186,196" stroke="#8a5a34" stroke-width="9" fill="none" stroke-linecap="round" />
+        <!-- 잎 덩어리 (겹쳐서 풍성하게) -->
+        <circle cx="150" cy="120" r="78" fill="#3fa96a" />
+        <circle cx="96"  cy="150" r="56" fill="#4fb877" />
+        <circle cx="206" cy="150" r="56" fill="#4fb877" />
+        <circle cx="150" cy="150" r="66" fill="#57c184" />
+        <circle cx="120" cy="110" r="46" fill="#63cd90" />
+        <circle cx="184" cy="112" r="46" fill="#63cd90" />
+      </svg>
+
+      <!-- 돌하르방 (감귤나무 옆의 수호신, SVG로 직접 그림) -->
+      <svg class="dolhareubang" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="돌하르방">
+        <!-- 그림자 -->
+        <ellipse cx="60" cy="192" rx="40" ry="7" fill="rgba(20,80,70,0.18)" />
+        <!-- 몸통 -->
+        <path d="M28,196 C24,150 30,120 60,118 C90,120 96,150 92,196 Z" fill="#7d8a92" />
+        <!-- 두 손 (배 위에 얹은 모습) -->
+        <ellipse cx="46" cy="168" rx="10" ry="7" fill="#6d7a82" />
+        <ellipse cx="74" cy="168" rx="10" ry="7" fill="#6d7a82" />
+        <!-- 벙거지 모자 -->
+        <path d="M30,74 C30,40 90,40 90,74 C90,80 84,84 78,84 L42,84 C36,84 30,80 30,74 Z" fill="#68757d" />
+        <!-- 얼굴 -->
+        <path d="M34,84 C34,132 86,132 86,84 Z" fill="#8b98a0" />
+        <!-- 부리부리한 눈 -->
+        <circle cx="49" cy="98" r="8" fill="#5a666e" />
+        <circle cx="71" cy="98" r="8" fill="#5a666e" />
+        <circle cx="49" cy="98" r="3.5" fill="#2f3a41" />
+        <circle cx="71" cy="98" r="3.5" fill="#2f3a41" />
+        <!-- 커다란 코 (돌하르방의 상징) -->
+        <path d="M60,102 C54,110 54,120 60,122 C66,120 66,110 60,102 Z" fill="#79868e" />
+        <!-- 지긋이 다문 입 -->
+        <path d="M50,116 C55,121 65,121 70,116" stroke="#5a666e" stroke-width="3" fill="none" stroke-linecap="round" />
+      </svg>
+
+      <!-- 감귤(소원)이 붙는 레이어 — script.js가 여기에 감귤을 그립니다 -->
+      <div class="tangerine-layer" id="tangerineLayer"></div>
+    </div>
+  </main>
+
+  <!-- ===== 소원 남기기 버튼 (플로팅) ===== -->
+  <button type="button" class="fab" id="openFormBtn" aria-label="소원 남기기">
+    <span class="fab__plus">＋</span> 소원 남기기
+  </button>
+
+  <!-- ===== 소원 상세 모달 (감귤 클릭 시) ===== -->
+  <div class="modal is-hidden" id="wishModal" role="dialog" aria-modal="true" aria-labelledby="wishModalMeta">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card modal__card--wish">
+      <button type="button" class="modal__close" data-close aria-label="닫기">✕</button>
+      <div class="wish-card__fruit">🍊</div>
+      <p class="wish-card__meta" id="wishModalMeta">—</p>
+      <p class="wish-card__text" id="wishModalText">—</p>
+    </div>
+  </div>
+
+  <!-- ===== 소원 입력 모달 ===== -->
+  <div class="modal is-hidden" id="formModal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card modal__card--form">
+      <button type="button" class="modal__close" data-close aria-label="닫기">✕</button>
+      <h2 class="form__title" id="formTitle">언젠가, 제주에서 🍊</h2>
+      <p class="form__desc">가면 하고 싶은 일 한 줄을 남기면 감귤나무에 감귤이 톡 열려요.</p>
+
+      <form id="wishForm" class="form">
+        <div class="form__row">
+          <label for="inputAge">나이</label>
+          <input type="number" id="inputAge" name="age" min="1" max="120"
+                 inputmode="numeric" placeholder="예) 24" required />
+        </div>
+
+        <div class="form__row">
+          <label for="inputMbti">MBTI</label>
+          <select id="inputMbti" name="mbti" required>
+            <option value="" disabled selected>선택하세요</option>
+            <!-- MBTI 옵션은 script.js에서 채워집니다 -->
+          </select>
+        </div>
+
+        <div class="form__row">
+          <label for="inputWish">소원 한 줄</label>
+          <textarea id="inputWish" name="wish" maxlength="80" rows="2"
+                    placeholder="예) 성산일출봉에서 해 뜨는 걸 보고 싶어요" required></textarea>
+          <span class="form__hint"><span id="wishLen">0</span>/80</span>
+        </div>
+
+        <!-- 폼 제출 결과 메시지 -->
+        <p class="form__message is-hidden" id="formMessage"></p>
+
+        <button type="submit" class="btn btn--primary" id="submitBtn">
+          감귤 톡! 열기
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== 푸터 ===== -->
+  <footer class="footer">
+    <p>🍊 언젠가, 제주 — 마음을 먼저 보내는 곳</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
