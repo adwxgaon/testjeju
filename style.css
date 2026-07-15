@@ -1,0 +1,479 @@
+/* =========================================================
+   언젠가, 제주 — 스타일시트
+   · 제주의 맑은 하늘·바다 톤 (청량한 하늘색 / 터콰이즈)
+   · 이미지 파일 없이 CSS/SVG/이모지로만 표현
+   · 모바일 반응형
+   ========================================================= */
+
+/* ----- 0. 색상·간격 변수 정의 ----- */
+:root {
+  --sky-top: #aee7ff;     /* 하늘 위쪽 (맑은 하늘색) */
+  --sky-mid: #cdf3ff;     /* 하늘 중간 */
+  --sea-top: #4fcfd6;     /* 바다 위쪽 (터콰이즈) */
+  --sea-bottom: #1fa9c4;  /* 바다 아래쪽 (짙은 청록) */
+  --ink: #1c3b45;         /* 기본 글자색 (짙은 청록빛 남색) */
+  --ink-soft: #4a6b74;    /* 보조 글자색 */
+  --tangerine: #ff9a2e;   /* 감귤색 */
+  --tangerine-deep: #f57c1f;
+  --white: #ffffff;
+  --card-shadow: 0 12px 32px rgba(20, 70, 80, 0.18);
+  --radius: 20px;
+}
+
+/* ----- 1. 기본 리셋 ----- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕",
+               system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  /* 하늘색 → 옅은 하늘색 세로 그라디언트 배경 */
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 55%, #eafaff 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- 2. 배경 (하늘·해·구름·바다) ----- */
+.sky-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;          /* 콘텐츠 뒤로 */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 은은한 해 */
+.sun {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6d6 0%, #ffe9a8 60%, rgba(255,233,168,0) 72%);
+  filter: blur(1px);
+  animation: sunPulse 6s ease-in-out infinite;
+}
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.9; }
+  50%      { transform: scale(1.08); opacity: 1;   }
+}
+
+/* 구름 (흰 타원 두 개를 겹쳐 표현) */
+.cloud {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50px;
+  filter: blur(2px);
+  animation: floatCloud linear infinite;
+}
+.cloud::before {
+  content: "";
+  position: absolute;
+  top: -18px; left: 24px;
+  width: 60px; height: 60px;
+  background: inherit;
+  border-radius: 50%;
+}
+.cloud--1 { top: 14%; left: -140px; transform: scale(1);    animation-duration: 42s; }
+.cloud--2 { top: 26%; left: -160px; transform: scale(0.7);  animation-duration: 58s; animation-delay: -12s; }
+.cloud--3 { top: 9%;  left: -180px; transform: scale(1.25); animation-duration: 70s; animation-delay: -30s; }
+@keyframes floatCloud {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(100vw + 340px)); }
+}
+
+/* 바다 (화면 아래쪽) */
+.sea {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 26vh;
+  min-height: 150px;
+  background: linear-gradient(180deg, var(--sea-top) 0%, var(--sea-bottom) 100%);
+}
+/* 파도 SVG */
+.wave {
+  position: absolute;
+  top: -1px; left: 0;
+  width: 200%;
+  height: 60px;
+  fill: var(--sea-top);
+  animation: waveMove 9s ease-in-out infinite alternate;
+}
+.wave--back {
+  top: -1px;
+  height: 70px;
+  fill: rgba(255, 255, 255, 0.25);
+  animation-duration: 12s;
+  animation-direction: alternate-reverse;
+}
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+
+/* ----- 3. 상단 타이틀 ----- */
+.hero {
+  text-align: center;
+  padding: 40px 20px 10px;
+}
+.hero__title {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
+}
+.hero__subtitle {
+  margin-top: 10px;
+  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.hero__count {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.hero__count strong { color: var(--tangerine-deep); font-size: 1.05rem; }
+
+/* ----- 4. MBTI 필터 ----- */
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 6px 16px 4px;
+}
+.filter__label { font-size: 0.9rem; color: var(--ink-soft); font-weight: 600; }
+.filter__select,
+.filter__reset {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(31, 169, 196, 0.4);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  cursor: pointer;
+}
+.filter__reset { border-color: rgba(0,0,0,0.08); }
+.filter__reset:hover { background: #fff; }
+
+/* ----- 5. 무대(감귤나무 + 돌하르방) ----- */
+.stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px 120px;
+  position: relative;
+}
+
+/* 나무·돌하르방·감귤이 얹히는 무대. 고정 비율로 반응형 유지 */
+.scene {
+  position: relative;
+  width: min(560px, 92vw);
+  aspect-ratio: 5 / 5.2;
+}
+
+/* 감귤나무 (무대 대부분 차지) */
+.tree {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-52%);
+  width: 78%;
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(20, 80, 70, 0.18));
+}
+
+/* 돌하르방 (나무 오른쪽 옆) */
+.dolhareubang {
+  position: absolute;
+  right: 0;
+  bottom: 3%;
+  width: 24%;
+  height: auto;
+  filter: drop-shadow(0 8px 12px rgba(20, 80, 70, 0.2));
+  animation: dolBob 5s ease-in-out infinite;
+}
+@keyframes dolBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* 감귤이 붙는 레이어 (나무 위에 겹침) */
+.tangerine-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;   /* 레이어 자체는 클릭 통과, 감귤만 클릭 */
+}
+
+/* ----- 6. 감귤(소원) ----- */
+.tangerine {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%) scale(0);
+  cursor: pointer;
+  pointer-events: auto;
+  border: none;
+  background: transparent;
+  padding: 0;
+  /* 톡! 열리는 등장 애니메이션 */
+  animation: pop 0.6s cubic-bezier(0.22, 1.4, 0.4, 1) forwards;
+  transition: transform 0.2s ease;
+}
+/* 감귤 몸통 (원 + 하이라이트) */
+.tangerine__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, #ffc06b 0%, var(--tangerine) 55%, var(--tangerine-deep) 100%);
+  box-shadow: inset -3px -4px 6px rgba(180, 80, 0, 0.35),
+              0 3px 6px rgba(180, 90, 0, 0.3);
+}
+/* 감귤 꼭지(잎) */
+.tangerine__leaf {
+  position: absolute;
+  top: -5px; left: 50%;
+  width: 12px; height: 9px;
+  transform: translateX(-50%) rotate(-12deg);
+  background: #3fa96a;
+  border-radius: 0 80% 0 80%;
+}
+.tangerine:hover { transform: translate(-50%, -50%) scale(1.25); z-index: 5; }
+.tangerine:focus-visible { outline: 3px solid #fff; outline-offset: 2px; border-radius: 50%; }
+
+@keyframes pop {
+  0%   { transform: translate(-50%, -50%) scale(0)   rotate(-30deg); }
+  60%  { transform: translate(-50%, -50%) scale(1.3) rotate(8deg);   }
+  100% { transform: translate(-50%, -50%) scale(1)   rotate(0);      }
+}
+
+/* MBTI 필터 강조: 선택한 유형만 반짝, 나머지는 흐리게 */
+.tangerine-layer.is-filtering .tangerine { opacity: 0.28; filter: grayscale(0.5); }
+.tangerine-layer.is-filtering .tangerine.is-match {
+  opacity: 1;
+  filter: none;
+  animation: pop 0.6s cubic-bezier(0.22,1.4,0.4,1) forwards, glow 1.4s ease-in-out infinite;
+  z-index: 4;
+}
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(255,200,80,0.6)); }
+  50%      { filter: drop-shadow(0 0 12px rgba(255,190,60,1)); transform: translate(-50%,-50%) scale(1.15); }
+}
+
+/* ----- 7. 상태 표시 (로딩·에러·빈 상태) ----- */
+.state {
+  text-align: center;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 32px 28px;
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+  line-height: 1.6;
+}
+.spinner {
+  width: 42px; height: 42px;
+  margin: 0 auto 14px;
+  border: 4px solid rgba(31, 169, 196, 0.25);
+  border-top-color: var(--sea-bottom);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ----- 8. 버튼 공통 ----- */
+.btn {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn--primary {
+  background: linear-gradient(135deg, var(--tangerine) 0%, var(--tangerine-deep) 100%);
+  color: #fff;
+  width: 100%;
+  box-shadow: 0 8px 18px rgba(245, 124, 31, 0.4);
+}
+.btn--primary:hover { box-shadow: 0 10px 24px rgba(245, 124, 31, 0.55); }
+.btn--primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn--ghost {
+  margin-top: 14px;
+  background: #fff;
+  color: var(--sea-bottom);
+  border: 1.5px solid var(--sea-bottom);
+}
+
+/* ----- 9. 플로팅 버튼(FAB) ----- */
+.fab {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--tangerine) 0%, var(--tangerine-deep) 100%);
+  box-shadow: 0 10px 24px rgba(245, 124, 31, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.fab:hover { transform: translateX(-50%) translateY(-2px); }
+.fab:active { transform: translateX(-50%) scale(0.97); }
+.fab__plus { font-size: 1.2rem; line-height: 1; }
+
+/* ----- 10. 모달 (소원 상세 / 입력) ----- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 50, 60, 0.45);
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.25s ease;
+}
+.modal__card {
+  position: relative;
+  width: min(420px, 100%);
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 30px 26px 26px;
+  box-shadow: var(--card-shadow);
+  animation: cardUp 0.3s cubic-bezier(0.22, 1.2, 0.4, 1);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cardUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal__close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #f0f4f5;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.modal__close:hover { background: #e2eaec; }
+
+/* 소원 상세 카드 */
+.modal__card--wish { text-align: center; }
+.wish-card__fruit { font-size: 3rem; }
+.wish-card__meta {
+  margin-top: 8px;
+  font-weight: 800;
+  color: var(--tangerine-deep);
+  font-size: 1.1rem;
+}
+.wish-card__text {
+  margin-top: 14px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+/* ----- 11. 입력 폼 ----- */
+.form__title { font-size: 1.4rem; font-weight: 800; }
+.form__desc { margin-top: 6px; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.5; }
+.form { margin-top: 18px; }
+.form__row { margin-bottom: 16px; position: relative; }
+.form__row label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.form__row input,
+.form__row select,
+.form__row textarea {
+  width: 100%;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 12px 14px;
+  border: 1.5px solid #d6e2e5;
+  border-radius: 12px;
+  background: #f8fbfc;
+  color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.form__row textarea { resize: none; line-height: 1.5; }
+.form__row input:focus,
+.form__row select:focus,
+.form__row textarea:focus {
+  outline: none;
+  border-color: var(--sea-top);
+  box-shadow: 0 0 0 3px rgba(79, 207, 214, 0.2);
+}
+.form__hint {
+  position: absolute;
+  right: 4px; bottom: -18px;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+.form__message {
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.form__message.is-error   { background: #ffe9e6; color: #c23b2a; }
+.form__message.is-success { background: #e6f8ef; color: #1f8a56; }
+
+/* ----- 12. 푸터 ----- */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 76px;   /* FAB에 가리지 않도록 여백 */
+}
+
+/* ----- 13. 공통 유틸 ----- */
+.is-hidden { display: none !important; }
+
+/* ----- 14. 모바일 반응형 ----- */
+@media (max-width: 480px) {
+  .hero { padding-top: 28px; }
+  .tangerine { width: 28px; height: 28px; }
+  .filter__label { width: 100%; text-align: center; }
+  .stage { padding-bottom: 100px; }
+}
+
+/* 애니메이션을 원치 않는 사용자 배려 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
