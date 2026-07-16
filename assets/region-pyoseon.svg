@@ -1,0 +1,120 @@
+<!-- 표선·남원 — 제주민속촌 (초가집 · 돌담 · 정낭) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <filter id="sk"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+    <g id="cloud">
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="#ffffff"/>
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="none" stroke="#40514a" stroke-width="2"/>
+    </g>
+    <g id="stone">
+      <ellipse rx="32" ry="19" fill="#6f6c77" stroke="#26242b" stroke-width="1.8"/>
+      <circle cx="-8" cy="-3" r="2.2" fill="#201f25" opacity="0.55"/>
+      <circle cx="9" cy="4" r="1.7" fill="#201f25" opacity="0.55"/>
+    </g>
+    <g id="jar">
+      <path d="M-16,0 C-24,-14 -22,-34 -12,-42 L12,-42 C22,-34 24,-14 16,0 Z" fill="#9a6b45" stroke="#40514a" stroke-width="2.2"/>
+      <ellipse cx="0" cy="-42" rx="12" ry="4" fill="#7d5230" stroke="#40514a" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <rect width="1440" height="760" fill="#e3f1fb"/>
+  <g filter="url(#sk)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 해 · 구름 · 새 -->
+    <circle cx="1200" cy="116" r="52" fill="#ffdf8a" stroke="#40514a" stroke-width="2"/>
+    <use href="#cloud" transform="translate(170,90) scale(1.25)"/>
+    <use href="#cloud" transform="translate(560,60) scale(0.9)"/>
+    <use href="#cloud" transform="translate(930,130) scale(0.72)"/>
+    <path d="M780,150 q12,-12 24,0 q12,-12 24,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+
+    <!-- 뒷산 능선 -->
+    <path d="M-20,360 C200,320 460,312 720,330 C980,348 1240,332 1460,352 L1460,760 L-20,760 Z" fill="#cfe3b8"/>
+    <path d="M-20,360 C200,320 460,312 720,330 C980,348 1240,332 1460,352" fill="none" stroke="#40514a" stroke-width="2.2"/>
+
+    <!-- 마당 -->
+    <path d="M-20,470 C300,452 760,462 1120,454 C1280,450 1400,458 1460,460 L1460,760 L-20,760 Z" fill="#ecdfba"/>
+    <path d="M-20,470 C300,452 760,462 1120,454 C1280,450 1400,458 1460,460" fill="none" stroke="#c9b788" stroke-width="2"/>
+
+    <!-- 초가집 1 (큰집) -->
+    <g>
+      <path d="M148,414 C230,300 500,300 582,414 Z" fill="#d9b45c" stroke="#8a6b2f" stroke-width="2.6"/>
+      <path d="M196,382 Q365,318 534,382 M172,398 Q365,336 558,398 M232,362 Q365,306 498,362" fill="none" stroke="#8a6b2f" stroke-width="1.8" opacity="0.85"/>
+      <path d="M240,318 Q300,376 250,408 M330,306 Q380,368 340,410 M430,308 Q460,368 470,408 M510,330 Q540,378 528,406" fill="none" stroke="#8a6b2f" stroke-width="1.6" opacity="0.7"/>
+      <rect x="180" y="412" width="370" height="128" fill="#f0e2c3" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="322" y="442" width="86" height="98" fill="#6b4a28" stroke="#40514a" stroke-width="2.4"/>
+      <line x1="365" y1="442" x2="365" y2="540" stroke="#40514a" stroke-width="1.8"/>
+      <rect x="216" y="446" width="66" height="56" fill="#e8d9ae" stroke="#40514a" stroke-width="2.2"/>
+      <path d="M216,465 L282,465 M216,484 L282,484 M238,446 L238,502 M260,446 L260,502" stroke="#8a6b2f" stroke-width="1.8"/>
+      <rect x="448" y="446" width="66" height="56" fill="#e8d9ae" stroke="#40514a" stroke-width="2.2"/>
+      <path d="M448,465 L514,465 M448,484 L514,484 M470,446 L470,502 M492,446 L492,502" stroke="#8a6b2f" stroke-width="1.8"/>
+      <!-- 벽 아래 현무암 기단 -->
+      <use href="#stone" transform="translate(206,532) scale(0.55)"/><use href="#stone" transform="translate(250,534) scale(0.55) rotate(8)"/>
+      <use href="#stone" transform="translate(294,532) scale(0.55) rotate(-6)"/><use href="#stone" transform="translate(438,534) scale(0.55) rotate(5)"/>
+      <use href="#stone" transform="translate(482,532) scale(0.55) rotate(-8)"/><use href="#stone" transform="translate(526,534) scale(0.55)"/>
+    </g>
+
+    <!-- 초가집 2 (작은집) -->
+    <g>
+      <path d="M800,442 C860,356 1060,356 1120,442 Z" fill="#d9b45c" stroke="#8a6b2f" stroke-width="2.4"/>
+      <path d="M836,418 Q960,368 1084,418 M818,430 Q960,378 1102,430" fill="none" stroke="#8a6b2f" stroke-width="1.7" opacity="0.85"/>
+      <path d="M880,376 Q920,414 892,438 M980,368 Q1010,412 996,438 M1052,388 Q1074,416 1066,436" fill="none" stroke="#8a6b2f" stroke-width="1.5" opacity="0.7"/>
+      <rect x="824" y="440" width="272" height="104" fill="#f0e2c3" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="926" y="464" width="70" height="80" fill="#6b4a28" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="852" y="466" width="52" height="46" fill="#e8d9ae" stroke="#40514a" stroke-width="2.2"/>
+      <path d="M852,481 L904,481 M852,497 L904,497 M869,466 L869,512 M887,466 L887,512" stroke="#8a6b2f" stroke-width="1.6"/>
+      <rect x="1018" y="466" width="52" height="46" fill="#e8d9ae" stroke="#40514a" stroke-width="2.2"/>
+      <path d="M1018,481 L1070,481 M1018,497 L1070,497 M1035,466 L1035,512 M1053,466 L1053,512" stroke="#8a6b2f" stroke-width="1.6"/>
+    </g>
+
+    <!-- 감귤나무 -->
+    <g transform="translate(1290,520)">
+      <path d="M0,60 C-4,30 -2,10 0,-6" fill="none" stroke="#7d5c36" stroke-width="8"/>
+      <circle cx="-34" cy="-30" r="30" fill="#5f8f3f" stroke="#40514a" stroke-width="2.2"/>
+      <circle cx="10" cy="-52" r="34" fill="#6f9a3a" stroke="#40514a" stroke-width="2.2"/>
+      <circle cx="42" cy="-18" r="27" fill="#5f8f3f" stroke="#40514a" stroke-width="2.2"/>
+      <circle cx="-30" cy="-24" r="7" fill="#ff8c1a" stroke="#40514a" stroke-width="1.6"/>
+      <circle cx="6" cy="-46" r="7" fill="#ff8c1a" stroke="#40514a" stroke-width="1.6"/>
+      <circle cx="34" cy="-14" r="7" fill="#ff8c1a" stroke="#40514a" stroke-width="1.6"/>
+      <circle cx="24" cy="-58" r="7" fill="#ff8c1a" stroke="#40514a" stroke-width="1.6"/>
+    </g>
+
+    <!-- 항아리(장독대) -->
+    <use href="#jar" transform="translate(660,560)"/>
+    <use href="#jar" transform="translate(706,566) scale(0.85)"/>
+    <use href="#jar" transform="translate(744,562) scale(1.05)"/>
+
+    <!-- 앞 돌담 (정낭 양옆) -->
+    <g>
+      <use href="#stone" transform="translate(30,652)"/><use href="#stone" transform="translate(96,646) rotate(7)"/>
+      <use href="#stone" transform="translate(162,654) rotate(-5)"/><use href="#stone" transform="translate(228,647) rotate(4)"/>
+      <use href="#stone" transform="translate(294,654) rotate(-7)"/><use href="#stone" transform="translate(360,648)"/>
+      <use href="#stone" transform="translate(426,655) rotate(6)"/><use href="#stone" transform="translate(492,648) rotate(-4)"/>
+      <use href="#stone" transform="translate(60,690) rotate(-6)"/><use href="#stone" transform="translate(128,696) rotate(5)"/>
+      <use href="#stone" transform="translate(196,690)"/><use href="#stone" transform="translate(264,697) rotate(-7)"/>
+      <use href="#stone" transform="translate(332,690) rotate(6)"/><use href="#stone" transform="translate(400,696)"/>
+      <use href="#stone" transform="translate(468,690) rotate(-5)"/>
+      <use href="#stone" transform="translate(950,652)"/><use href="#stone" transform="translate(1016,646) rotate(-6)"/>
+      <use href="#stone" transform="translate(1082,654) rotate(5)"/><use href="#stone" transform="translate(1148,647)"/>
+      <use href="#stone" transform="translate(1214,654) rotate(-4)"/><use href="#stone" transform="translate(1280,648) rotate(7)"/>
+      <use href="#stone" transform="translate(1346,655)"/><use href="#stone" transform="translate(1412,648) rotate(-6)"/>
+      <use href="#stone" transform="translate(982,690) rotate(5)"/><use href="#stone" transform="translate(1050,696)"/>
+      <use href="#stone" transform="translate(1118,690) rotate(-6)"/><use href="#stone" transform="translate(1186,697) rotate(4)"/>
+      <use href="#stone" transform="translate(1254,690)"/><use href="#stone" transform="translate(1322,696) rotate(-5)"/>
+      <use href="#stone" transform="translate(1390,690) rotate(6)"/>
+    </g>
+
+    <!-- 정낭 (구멍 뚫린 돌기둥 + 나무 막대 3개) -->
+    <g>
+      <rect x="560" y="600" width="34" height="120" rx="10" fill="#6f6c77" stroke="#26242b" stroke-width="2.4"/>
+      <rect x="856" y="600" width="34" height="120" rx="10" fill="#6f6c77" stroke="#26242b" stroke-width="2.4"/>
+      <circle cx="577" cy="628" r="5" fill="#201f25"/><circle cx="577" cy="660" r="5" fill="#201f25"/><circle cx="577" cy="692" r="5" fill="#201f25"/>
+      <circle cx="873" cy="628" r="5" fill="#201f25"/><circle cx="873" cy="660" r="5" fill="#201f25"/><circle cx="873" cy="692" r="5" fill="#201f25"/>
+      <line x1="570" y1="628" x2="880" y2="632" stroke="#7d5c36" stroke-width="8"/>
+      <line x1="570" y1="660" x2="880" y2="663" stroke="#8a6b3f" stroke-width="8"/>
+      <line x1="570" y1="692" x2="880" y2="694" stroke="#7d5c36" stroke-width="8"/>
+    </g>
+
+    <!-- 마당 길 -->
+    <path d="M640,760 C660,724 700,700 725,690 C750,700 790,724 810,760 Z" fill="#decba0" stroke="#c1a469" stroke-width="2" opacity="0.9"/>
+  </g>
+</svg>
