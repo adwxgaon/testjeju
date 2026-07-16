@@ -1,0 +1,131 @@
+<!-- 제주시 — 시청과 번화가 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <filter id="sk"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+    <g id="cloud">
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="#ffffff"/>
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="none" stroke="#40514a" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <rect width="1440" height="760" fill="#e3f1fb"/>
+  <g filter="url(#sk)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 해 · 구름 · 새 -->
+    <circle cx="170" cy="110" r="48" fill="#ffdf8a" stroke="#40514a" stroke-width="2"/>
+    <use href="#cloud" transform="translate(420,70) scale(1.1)"/>
+    <use href="#cloud" transform="translate(1150,90) scale(0.85)"/>
+    <path d="M940,110 q12,-12 24,0 q12,-12 24,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+
+    <!-- 뒤편 스카이라인 -->
+    <g fill="#d5e2ec" stroke="#a9c0d0" stroke-width="2">
+      <rect x="-20" y="250" width="150" height="260"/>
+      <rect x="150" y="200" width="120" height="310"/>
+      <rect x="290" y="280" width="140" height="230"/>
+      <rect x="1020" y="230" width="130" height="280"/>
+      <rect x="1170" y="290" width="120" height="220"/>
+      <rect x="1310" y="220" width="150" height="290"/>
+    </g>
+    <g fill="#b9cfdd">
+      <rect x="20" y="280" width="16" height="16"/><rect x="60" y="280" width="16" height="16"/><rect x="20" y="320" width="16" height="16"/><rect x="60" y="320" width="16" height="16"/>
+      <rect x="180" y="230" width="16" height="16"/><rect x="220" y="230" width="16" height="16"/><rect x="180" y="270" width="16" height="16"/><rect x="220" y="270" width="16" height="16"/>
+      <rect x="320" y="310" width="16" height="16"/><rect x="360" y="310" width="16" height="16"/><rect x="320" y="350" width="16" height="16"/>
+      <rect x="1050" y="260" width="16" height="16"/><rect x="1090" y="260" width="16" height="16"/><rect x="1050" y="300" width="16" height="16"/>
+      <rect x="1200" y="320" width="16" height="16"/><rect x="1240" y="320" width="16" height="16"/>
+      <rect x="1340" y="250" width="16" height="16"/><rect x="1380" y="250" width="16" height="16"/><rect x="1340" y="290" width="16" height="16"/><rect x="1380" y="290" width="16" height="16"/>
+    </g>
+
+    <!-- 제주시청 -->
+    <g>
+      <line x1="720" y1="176" x2="720" y2="130" stroke="#40514a" stroke-width="3"/>
+      <path d="M720,130 L768,140 L720,152 Z" fill="#ff8c1a" stroke="#40514a" stroke-width="2"/>
+      <rect x="660" y="176" width="120" height="64" fill="#f6f1e6" stroke="#40514a" stroke-width="2.4"/>
+      <circle cx="720" cy="208" r="20" fill="#ffffff" stroke="#40514a" stroke-width="2.2"/>
+      <line x1="720" y1="208" x2="720" y2="195" stroke="#40514a" stroke-width="2.2"/>
+      <line x1="720" y1="208" x2="730" y2="212" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="520" y="240" width="400" height="270" fill="#f2ede2" stroke="#40514a" stroke-width="2.6"/>
+      <line x1="508" y1="240" x2="932" y2="240" stroke="#40514a" stroke-width="3.5"/>
+      <rect x="600" y="266" width="240" height="46" rx="8" fill="#3a4a55" stroke="#40514a" stroke-width="2"/>
+      <text x="646" y="300" font-family="sans-serif" font-size="30" font-weight="bold" fill="#ffffff">제주시청</text>
+      <!-- 기둥 -->
+      <rect x="548" y="340" width="30" height="170" fill="#e4dccb" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="640" y="340" width="30" height="170" fill="#e4dccb" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="770" y="340" width="30" height="170" fill="#e4dccb" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="862" y="340" width="30" height="170" fill="#e4dccb" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="688" y="380" width="64" height="130" fill="#8fb2c4" stroke="#40514a" stroke-width="2.2"/>
+      <line x1="720" y1="380" x2="720" y2="510" stroke="#40514a" stroke-width="1.8"/>
+      <rect x="560" y="336" width="320" height="10" fill="#d8cfba" stroke="#40514a" stroke-width="1.8"/>
+      <!-- 계단 -->
+      <rect x="500" y="510" width="440" height="14" fill="#d8cfba" stroke="#40514a" stroke-width="2"/>
+      <rect x="480" y="524" width="480" height="14" fill="#cfc5ae" stroke="#40514a" stroke-width="2"/>
+    </g>
+
+    <!-- 왼쪽 상가 -->
+    <g>
+      <rect x="60" y="360" width="330" height="178" fill="#fff2dc" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="76" y="376" width="140" height="40" rx="7" fill="#ff8c1a" stroke="#40514a" stroke-width="2"/>
+      <text x="96" y="405" font-family="sans-serif" font-size="24" font-weight="bold" fill="#201200">국수거리</text>
+      <rect x="236" y="376" width="138" height="40" rx="7" fill="#5fae8f" stroke="#40514a" stroke-width="2"/>
+      <text x="262" y="405" font-family="sans-serif" font-size="24" font-weight="bold" fill="#ffffff">서  점</text>
+      <rect x="86" y="440" width="80" height="70" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="190" y="440" width="60" height="98" fill="#7d5c36" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="280" y="440" width="80" height="70" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
+    </g>
+
+    <!-- 오른쪽 상가 -->
+    <g>
+      <rect x="1040" y="380" width="340" height="158" fill="#e8f0fa" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="1058" y="396" width="150" height="40" rx="7" fill="#f5cf3a" stroke="#40514a" stroke-width="2"/>
+      <text x="1076" y="425" font-family="sans-serif" font-size="24" font-weight="bold" fill="#5c4a10">분식집</text>
+      <rect x="1228" y="396" width="134" height="40" rx="7" fill="#ff5f4e" stroke="#40514a" stroke-width="2"/>
+      <text x="1252" y="425" font-family="sans-serif" font-size="24" font-weight="bold" fill="#ffffff">노래방</text>
+      <rect x="1064" y="458" width="86" height="80" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="1180" y="458" width="56" height="80" fill="#7d5c36" stroke="#40514a" stroke-width="2.2"/>
+      <rect x="1268" y="458" width="86" height="80" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
+    </g>
+
+    <!-- 도로 -->
+    <rect x="-20" y="538" width="1480" height="222" fill="#c6ccd2"/>
+    <line x1="-20" y1="538" x2="1460" y2="538" stroke="#9aa2aa" stroke-width="2.5"/>
+    <path d="M-20,650 L120,650 M220,650 L360,650 M460,650 L600,650 M700,650 L840,650 M940,650 L1080,650 M1180,650 L1320,650 M1420,650 L1460,650" stroke="#ffffff" stroke-width="6" opacity="0.9"/>
+    <!-- 횡단보도 -->
+    <g fill="#ffffff" opacity="0.95">
+      <rect x="560" y="560" width="46" height="70" transform="skewX(-8)"/>
+      <rect x="640" y="560" width="46" height="70" transform="skewX(-8)"/>
+      <rect x="720" y="560" width="46" height="70" transform="skewX(-8)"/>
+      <rect x="800" y="560" width="46" height="70" transform="skewX(-8)"/>
+    </g>
+
+    <!-- 가로등 · 신호등 -->
+    <g>
+      <line x1="450" y1="538" x2="450" y2="420" stroke="#40514a" stroke-width="5"/>
+      <path d="M450,420 q0,-26 34,-26" fill="none" stroke="#40514a" stroke-width="5"/>
+      <circle cx="490" cy="394" r="10" fill="#ffdf8a" stroke="#40514a" stroke-width="2.2"/>
+      <line x1="990" y1="538" x2="990" y2="430" stroke="#40514a" stroke-width="5"/>
+      <rect x="972" y="392" width="36" height="40" rx="8" fill="#3a3742" stroke="#26242b" stroke-width="2"/>
+      <circle cx="990" cy="404" r="6" fill="#ff5f4e"/>
+      <circle cx="990" cy="420" r="6" fill="#7fd45f"/>
+    </g>
+
+    <!-- 시내버스 -->
+    <g transform="translate(180,672)">
+      <rect x="0" y="0" width="230" height="66" rx="12" fill="#7ecfe0" stroke="#40514a" stroke-width="2.6"/>
+      <rect x="14" y="12" width="44" height="28" rx="5" fill="#eef8ff" stroke="#40514a" stroke-width="2"/>
+      <rect x="70" y="12" width="44" height="28" rx="5" fill="#eef8ff" stroke="#40514a" stroke-width="2"/>
+      <rect x="126" y="12" width="44" height="28" rx="5" fill="#eef8ff" stroke="#40514a" stroke-width="2"/>
+      <rect x="182" y="12" width="34" height="28" rx="5" fill="#eef8ff" stroke="#40514a" stroke-width="2"/>
+      <circle cx="52" cy="66" r="15" fill="#3a3742" stroke="#26242b" stroke-width="2"/>
+      <circle cx="178" cy="66" r="15" fill="#3a3742" stroke="#26242b" stroke-width="2"/>
+    </g>
+
+    <!-- 택시 -->
+    <g transform="translate(1080,690)">
+      <path d="M0,30 L14,8 Q20,0 32,0 L86,0 Q98,0 104,8 L118,30 Z" fill="#f5cf3a" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="-12" y="30" width="142" height="24" rx="8" fill="#f5cf3a" stroke="#40514a" stroke-width="2.4"/>
+      <rect x="30" y="8" width="26" height="20" rx="4" fill="#eef8ff" stroke="#40514a" stroke-width="1.8"/>
+      <rect x="64" y="8" width="26" height="20" rx="4" fill="#eef8ff" stroke="#40514a" stroke-width="1.8"/>
+      <circle cx="22" cy="56" r="12" fill="#3a3742" stroke="#26242b" stroke-width="2"/>
+      <circle cx="96" cy="56" r="12" fill="#3a3742" stroke="#26242b" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

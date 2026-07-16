@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- 감귤 몸통 -->
+  <circle cx="16" cy="19" r="11" fill="#ff8c1a"/>
+  <circle cx="16" cy="19" r="11" fill="none" stroke="#e56b00" stroke-width="1.4"/>
+  <!-- 밝은 하이라이트 -->
+  <ellipse cx="12" cy="15.5" rx="3.2" ry="2.6" fill="#ffc078" opacity="0.7"/>
+  <!-- 꼭지 -->
+  <path d="M15.4 8.4 h1.2 v2 h-1.2 z" fill="#8a5a2b"/>
+  <!-- 잎사귀 -->
+  <path d="M16 9 C13 4 7.5 4.2 5 6.4 C8 8.8 13 8.6 16 9 Z" fill="#4e9a28"/>
+  <path d="M16 9 C18.5 5.4 23 5.6 25 7.4 C22.2 9 18.6 9 16 9 Z" fill="#63b833"/>
+  <path d="M6.5 6.5 C9 7.4 12.5 8 15.4 8.7" fill="none" stroke="#3c7d1e" stroke-width="0.7" stroke-linecap="round"/>
+</svg>

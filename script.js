@@ -32,6 +32,51 @@ const MBTI_TYPES = [
   "ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP",
 ];
 
+/* ----- 맛집 카테고리 (기본 4종 + 제주 특화 3종) ----- */
+const FOOD_CATEGORIES = [
+  { name: "한식",   emoji: "🍚" },
+  { name: "중식",   emoji: "🥟" },
+  { name: "일식",   emoji: "🍣" },
+  { name: "양식",   emoji: "🍝" },
+  { name: "흑돼지", emoji: "🐷" },
+  { name: "횟집",   emoji: "🐟" },
+  { name: "갈치집", emoji: "🐠" },
+];
+const CATEGORY_BY_NAME = Object.fromEntries(FOOD_CATEGORIES.map(c => [c.name, c]));
+
+/* ----- 기본 맛집 데이터 (네이버 지도·인스타그램에서 유명한 곳들) ----- */
+const SEED_FOODS = [
+  // 제주시
+  { region: "제주시",     category: "한식",   name: "우진해장국",        desc: "고사리육개장으로 유명한 제주 대표 해장국집" },
+  { region: "제주시",     category: "흑돼지", name: "돈사돈",            desc: "두툼한 근고기 흑돼지 구이의 원조 맛집" },
+  { region: "제주시",     category: "한식",   name: "자매국수",          desc: "줄 서서 먹는 진한 고기국수 한 그릇" },
+  // 애월
+  { region: "애월",       category: "한식",   name: "이춘옥원조고등어쌈밥", desc: "노릇한 고등어구이와 쌈밥 한 상" },
+  { region: "애월",       category: "양식",   name: "몽상드애월",        desc: "애월 바다를 통유리로 보는 카페 브런치" },
+  // 한림·협재
+  { region: "한림·협재",  category: "일식",   name: "협재수우동",        desc: "협재 바다 앞 쫄깃한 붓카케 우동" },
+  { region: "한림·협재",  category: "한식",   name: "한림칼국수",        desc: "제주 보말이 듬뿍 들어간 보말칼국수" },
+  { region: "한림·협재",  category: "흑돼지", name: "협재온다정",        desc: "맑은 흑돼지곰탕으로 유명한 아침 맛집" },
+  // 성산·우도
+  { region: "성산·우도",  category: "갈치집", name: "맛나식당",          desc: "줄 서서 먹는 갈치조림·갈치구이 정식" },
+  { region: "성산·우도",  category: "횟집",   name: "경미네집",          desc: "우도 앞바다 해산물과 회 한 접시" },
+  { region: "성산·우도",  category: "한식",   name: "가시아방국수",      desc: "성산일출봉 옆 돔베고기와 고기국수" },
+  // 표선·남원
+  { region: "표선·남원",  category: "한식",   name: "춘자멸치국수",      desc: "40년 전통 소박한 멸치국수 한 그릇" },
+  { region: "표선·남원",  category: "횟집",   name: "공천포식당",        desc: "남원 바닷가 시원한 제주식 물회" },
+  // 서귀포
+  { region: "서귀포",     category: "갈치집", name: "네거리식당",        desc: "서귀포 대표 갈치국·갈치조림 노포" },
+  { region: "서귀포",     category: "중식",   name: "덕성원",            desc: "3대째 이어온 서귀포 중화요리, 깐풍기 맛집" },
+  { region: "서귀포",     category: "횟집",   name: "쌍둥이횟집",        desc: "푸짐한 스페셜 모둠회로 유명한 횟집" },
+  // 중문
+  { region: "중문",       category: "갈치집", name: "색달식당",          desc: "냄비째 나오는 매콤한 갈치조림" },
+  { region: "중문",       category: "흑돼지", name: "숙성도",            desc: "숙성 흑돼지 뼈등심으로 인스타를 달군 곳" },
+  { region: "중문",       category: "양식",   name: "더클리프",          desc: "중문 해변 절벽 위 피자와 선셋 라운지" },
+  // 한라산
+  { region: "한라산",     category: "한식",   name: "성미가든",          desc: "교래리 토종닭 샤브샤브와 닭죽 코스" },
+  { region: "한라산",     category: "한식",   name: "교래손칼국수",      desc: "한라산 가는 길 메밀 손칼국수" },
+];
+
 /* ----- DOM 참조 ----- */
 const el = {
   wipe:        document.getElementById("wipe"),
@@ -45,10 +90,14 @@ const el = {
   mapState:    document.getElementById("mapState"),
   mapStateText:document.getElementById("mapStateText"),
   mapRetry:    document.getElementById("mapRetry"),
+  mapTitle:    document.getElementById("mapTitle"),
+  mapSub:      document.getElementById("mapSub"),
   // 지역 뷰
   regionName:  document.getElementById("regionName"),
   regionEn:    document.getElementById("regionEn"),
   regionCount: document.getElementById("regionCount"),
+  regionCountSuffix: document.getElementById("regionCountSuffix"),
+  regionBg:    document.getElementById("regionBg"),
   orchard:     document.getElementById("orchard"),
   regionEmpty: document.getElementById("regionEmpty"),
   // 소원 상세 모달
@@ -59,6 +108,7 @@ const el = {
   // 입력 폼
   formModal:   document.getElementById("formModal"),
   openFormBtn: document.getElementById("openFormBtn"),
+  fabLabel:    document.getElementById("fabLabel"),
   wishForm:    document.getElementById("wishForm"),
   inputRegion: document.getElementById("inputRegion"),
   inputAge:    document.getElementById("inputAge"),
@@ -67,15 +117,42 @@ const el = {
   wishLen:     document.getElementById("wishLen"),
   submitBtn:   document.getElementById("submitBtn"),
   formMessage: document.getElementById("formMessage"),
+  // 맛집 상세 모달
+  foodModal:    document.getElementById("foodModal"),
+  foodEmoji:    document.getElementById("foodEmoji"),
+  foodRegion:   document.getElementById("foodRegion"),
+  foodName:     document.getElementById("foodName"),
+  foodCategory: document.getElementById("foodCategory"),
+  foodDesc:     document.getElementById("foodDesc"),
+  // 맛집 입력 폼
+  foodFormModal:     document.getElementById("foodFormModal"),
+  foodForm:          document.getElementById("foodForm"),
+  foodInputRegion:   document.getElementById("foodInputRegion"),
+  foodInputCategory: document.getElementById("foodInputCategory"),
+  foodInputName:     document.getElementById("foodInputName"),
+  foodInputDesc:     document.getElementById("foodInputDesc"),
+  foodDescLen:       document.getElementById("foodDescLen"),
+  foodSubmitBtn:     document.getElementById("foodSubmitBtn"),
+  foodFormMessage:   document.getElementById("foodFormMessage"),
 };
 
 /* ----- 앱 상태 ----- */
 let wishes = [];            // 전체 소원 [{timestamp, age, mbti, wish, region}]
+let foods = [];             // 서버에서 불러온 맛집 [{timestamp, region, category, name, desc}]
+let localFoods = [];        // 서버 저장 실패 시 이 브라우저에만 저장된 맛집
+let mapMode = "wish";       // 지도 모드: "wish"(소원) | "food"(맛집)
 let currentView = "intro";  // 현재 뷰
 let currentRegionId = null; // 지역 뷰에서 보고 있는 지역
 let map = null;             // Leaflet 지도 인스턴스
 let markers = {};          // 지역별 마커 캐시
 let dataLoaded = false;    // 데이터 최초 로드 여부
+
+const LOCAL_FOODS_KEY = "jeju_local_foods";
+
+// 화면에 보여줄 전체 맛집 = 기본(시드) + 서버 저장분 + 브라우저 저장분
+function allFoods() {
+  return SEED_FOODS.concat(foods, localFoods);
+}
 
 /* =========================================================
    1. 라우팅 + 페이지 전환 와이프
@@ -114,8 +191,8 @@ function enterMap() {
   if (!map) initMap();
   // 숨겨졌다 나타난 컨테이너의 크기를 다시 계산 (Leaflet 필수)
   setTimeout(() => { map.invalidateSize(); }, 60);
-  // 데이터가 준비됐으면 마커 갱신
-  if (dataLoaded) renderMarkers();
+  // 데이터가 준비됐으면 마커 갱신 (맛집 모드는 기본 데이터가 있어 바로 표시)
+  if (dataLoaded || mapMode === "food") renderMarkers();
 }
 
 // 제주도 외곽선(간략화 GeoJSON) — 스타일형 지도의 육지 폴리곤
@@ -145,21 +222,47 @@ function initMap() {
   map.setMaxBounds([[33.0, 126.0], [33.75, 127.1]]);
 }
 
-// 지역별 소원 개수를 세어 마커(뱃지) 생성/갱신
+/* ----- 소원 지도 ↔ 맛집 지도 전환 ----- */
+function setMode(mode) {
+  if (mapMode === mode) return;
+  mapMode = mode;
+
+  // 스위치 버튼 활성 표시
+  document.querySelectorAll(".mode-switch__btn").forEach(b => {
+    b.classList.toggle("is-on", b.dataset.mode === mode);
+  });
+
+  // 제목/설명/FAB 문구 교체
+  if (mode === "wish") {
+    el.mapTitle.textContent = "제주 소원 지도";
+    el.mapSub.textContent = "지역을 누르면 그곳에 쌓인 소원을 볼 수 있어요. 숫자는 소원 개수예요.";
+    el.fabLabel.textContent = "소원 남기기";
+  } else {
+    el.mapTitle.textContent = "제주 맛집 지도";
+    el.mapSub.textContent = "지역을 누르면 그곳의 맛집을 볼 수 있어요. 숫자는 맛집 개수예요.";
+    el.fabLabel.textContent = "맛집 추가하기";
+  }
+  document.body.dataset.mode = mode;
+
+  if (map) renderMarkers();
+}
+
+// 지역별 개수를 세어 마커(뱃지) 생성/갱신 — 현재 모드 기준
 function renderMarkers() {
-  const counts = countByRegion();
+  const counts = countByRegion(mapMode === "wish" ? wishes : allFoods());
+  const foodCls = mapMode === "food" ? " pin--food" : "";
 
   REGIONS.forEach(region => {
     const count = counts[region.name] || 0;
     const zero = count === 0 ? " is-zero" : "";
     const html =
-      `<div class="pin">
+      `<div class="pin${foodCls}">
          <span class="pin__count${zero}">${count}</span>
          <span class="pin__name">${region.name}</span>
        </div>`;
 
     if (markers[region.id]) {
-      // 이미 있으면 아이콘만 교체 (개수 갱신)
+      // 이미 있으면 아이콘만 교체 (개수/모드 갱신)
       markers[region.id].setIcon(makeIcon(html));
     } else {
       const marker = L.marker([region.lat, region.lng], {
@@ -181,10 +284,10 @@ function makeIcon(html) {
   });
 }
 
-// 지역 이름별 소원 개수 집계
-function countByRegion() {
+// 지역 이름별 개수 집계 (소원/맛집 공용)
+function countByRegion(list) {
   const counts = {};
-  wishes.forEach(w => {
+  list.forEach(w => {
     const name = (w.region || "").trim();
     if (name) counts[name] = (counts[name] || 0) + 1;
   });
@@ -217,13 +320,24 @@ function enterRegion(regionId) {
   el.regionName.textContent = region.name;
   el.regionEn.textContent = region.en;
 
-  const list = wishes.filter(w => (w.region || "").trim() === region.name);
-  el.regionCount.textContent = list.length;
+  // 지역 테마 배경 일러스트 교체
+  el.regionBg.src = "assets/region-" + region.id + ".svg";
 
   // 기존 카드 비우기 (빈 상태 요소는 유지)
   el.orchard.querySelectorAll(".wish-card").forEach(c => c.remove());
 
+  if (mapMode === "wish") renderRegionWishes(region);
+  else renderRegionFoods(region);
+}
+
+// 지역 페이지 — 소원 모드
+function renderRegionWishes(region) {
+  const list = wishes.filter(w => (w.region || "").trim() === region.name);
+  el.regionCount.textContent = list.length;
+  el.regionCountSuffix.textContent = "개의 소원이 맺혔어요";
+
   if (list.length === 0) {
+    el.regionEmpty.innerHTML = "<p>🌱 아직 이 지역엔 소원이 없어요.<br />첫 소원을 남겨보세요.</p>";
     el.regionEmpty.classList.remove("is-hidden");
     return;
   }
@@ -240,6 +354,36 @@ function enterRegion(regionId) {
        <div class="wish-card__text">${escapeHtml(item.wish)}</div>
        <div class="wish-card__meta">${escapeHtml(String(item.age))}세 · ${escapeHtml(item.mbti)}</div>`;
     card.addEventListener("click", () => openWishModal(item, region));
+    el.orchard.appendChild(card);
+  });
+}
+
+// 지역 페이지 — 맛집 모드
+function renderRegionFoods(region) {
+  const list = allFoods().filter(f => (f.region || "").trim() === region.name);
+  el.regionCount.textContent = list.length;
+  el.regionCountSuffix.textContent = "곳의 맛집이 있어요";
+
+  if (list.length === 0) {
+    el.regionEmpty.innerHTML = "<p>🍳 아직 등록된 맛집이 없어요.<br />첫 맛집을 추가해보세요.</p>";
+    el.regionEmpty.classList.remove("is-hidden");
+    return;
+  }
+  el.regionEmpty.classList.add("is-hidden");
+
+  // 최신 등록이 위로 (시드는 원래 순서 유지되도록 reverse 전체 적용)
+  list.slice().reverse().forEach((item, i) => {
+    const cat = CATEGORY_BY_NAME[item.category] || { name: item.category || "기타", emoji: "🍽️" };
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "wish-card wish-card--food";
+    card.style.animationDelay = (i % 10) * 0.04 + "s";
+    card.innerHTML =
+      `<div class="wish-card__fruit">${cat.emoji}</div>
+       <div class="wish-card__text">${escapeHtml(item.name)}</div>
+       <div class="wish-card__desc">${escapeHtml(item.desc || "")}</div>
+       <div class="wish-card__meta wish-card__meta--food">${escapeHtml(cat.name)}</div>`;
+    card.addEventListener("click", () => openFoodModal(item, region));
     el.orchard.appendChild(card);
   });
 }
@@ -268,6 +412,27 @@ async function loadWishes() {
   } catch (err) {
     console.error("소원 불러오기 실패:", err);
     setMapState("error");
+  }
+}
+
+/* ----- 맛집 불러오기 (doGet?type=food) ----- */
+async function loadFoods() {
+  // 이 브라우저에만 저장해 둔 맛집 복원
+  try {
+    localFoods = JSON.parse(localStorage.getItem(LOCAL_FOODS_KEY)) || [];
+  } catch (e) { localFoods = []; }
+
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "여기에_배포_URL") return;
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + "?type=food", { method: "GET" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    // 구버전 백엔드는 type을 몰라 소원 배열을 돌려줌 → name 필드가 있는 항목만 맛집으로 인정
+    foods = Array.isArray(data) ? data.filter(x => x && x.name) : [];
+    if (map && mapMode === "food") renderMarkers();
+    if (currentView === "region" && mapMode === "food") enterRegion(currentRegionId);
+  } catch (err) {
+    console.warn("맛집 불러오기 실패(기본 맛집만 표시):", err);
   }
 }
 
@@ -336,6 +501,59 @@ async function onSubmit(e) {
   }
 }
 
+/* ----- 맛집 제출 ----- */
+async function onFoodSubmit(e) {
+  e.preventDefault();
+
+  const payload = {
+    type:     "food",
+    region:   el.foodInputRegion.value.trim(),
+    category: el.foodInputCategory.value.trim(),
+    name:     el.foodInputName.value.trim(),
+    desc:     el.foodInputDesc.value.trim(),
+  };
+  if (!payload.region || !payload.category || !payload.name || !payload.desc) {
+    showFoodFormMessage("모든 칸을 채워주세요.", "error");
+    return;
+  }
+
+  el.foodSubmitBtn.disabled = true;
+  el.foodSubmitBtn.textContent = "맛집 찍는 중…";
+  el.foodFormMessage.classList.add("is-hidden");
+
+  const entry = {
+    timestamp: new Date().toISOString(),
+    region: payload.region, category: payload.category,
+    name: payload.name, desc: payload.desc,
+  };
+
+  try {
+    const result = await submitWish(payload); // 같은 웹앱 URL로 POST (type으로 구분)
+    if (result && result.result === "success") {
+      foods.push(entry); // 낙관적 업데이트
+    } else {
+      throw new Error("서버 응답 오류");
+    }
+  } catch (err) {
+    // 서버가 아직 맛집을 모르는 구버전이거나 통신 실패 → 이 브라우저에만 저장
+    console.warn("맛집 서버 저장 실패, 브라우저에 저장:", err);
+    localFoods.push(entry);
+    try { localStorage.setItem(LOCAL_FOODS_KEY, JSON.stringify(localFoods)); } catch (e2) {}
+  } finally {
+    el.foodSubmitBtn.disabled = false;
+    el.foodSubmitBtn.textContent = "맛집 콕! 찍기";
+  }
+
+  if (map) renderMarkers();
+  el.foodForm.reset();
+  el.foodDescLen.textContent = "0";
+  closeModals();
+
+  // 방금 추가한 지역으로 이동해 보여줌
+  const region = REGION_BY_NAME[payload.region];
+  if (region) go("region", region.id);
+}
+
 /* =========================================================
    6. 모달
    ========================================================= */
@@ -354,9 +572,28 @@ function openFormModal() {
   }
   el.formModal.classList.remove("is-hidden");
 }
+function openFoodModal(item, region) {
+  const cat = CATEGORY_BY_NAME[item.category] || { name: item.category || "기타", emoji: "🍽️" };
+  el.foodEmoji.textContent = cat.emoji;
+  el.foodRegion.textContent = region ? region.name : (item.region || "");
+  el.foodName.textContent = item.name;
+  el.foodCategory.textContent = cat.name;
+  el.foodDesc.textContent = item.desc || "";
+  el.foodModal.classList.remove("is-hidden");
+}
+function openFoodFormModal() {
+  el.foodFormMessage.classList.add("is-hidden");
+  if (currentView === "region" && currentRegionId) {
+    const r = REGIONS.find(x => x.id === currentRegionId);
+    if (r) el.foodInputRegion.value = r.name;
+  }
+  el.foodFormModal.classList.remove("is-hidden");
+}
 function closeModals() {
   el.wishModal.classList.add("is-hidden");
   el.formModal.classList.add("is-hidden");
+  el.foodModal.classList.add("is-hidden");
+  el.foodFormModal.classList.add("is-hidden");
 }
 
 /* =========================================================
@@ -373,9 +610,18 @@ function showFormMessage(text, type) {
   el.formMessage.className = "form__message " + (type === "error" ? "is-error" : "is-success");
   el.formMessage.classList.remove("is-hidden");
 }
+function showFoodFormMessage(text, type) {
+  el.foodFormMessage.textContent = text;
+  el.foodFormMessage.className = "form__message " + (type === "error" ? "is-error" : "is-success");
+  el.foodFormMessage.classList.remove("is-hidden");
+}
 function fillSelectOptions() {
-  REGIONS.forEach(r => el.inputRegion.appendChild(new Option(r.name, r.name)));
+  REGIONS.forEach(r => {
+    el.inputRegion.appendChild(new Option(r.name, r.name));
+    el.foodInputRegion.appendChild(new Option(r.name, r.name));
+  });
   MBTI_TYPES.forEach(t => el.inputMbti.appendChild(new Option(t, t)));
+  FOOD_CATEGORIES.forEach(c => el.foodInputCategory.appendChild(new Option(c.emoji + " " + c.name, c.name)));
 }
 
 /* =========================================================
@@ -387,13 +633,24 @@ function bindEvents() {
     btn.addEventListener("click", () => go(btn.dataset.go));
   });
   el.mapRetry.addEventListener("click", loadWishes);
-  el.openFormBtn.addEventListener("click", openFormModal);
+  // 플로팅 버튼 → 현재 모드에 맞는 입력 폼
+  el.openFormBtn.addEventListener("click", () => {
+    if (mapMode === "food") openFoodFormModal();
+    else openFormModal();
+  });
+
+  // 소원 지도 ↔ 맛집 지도 스위치
+  document.querySelectorAll(".mode-switch__btn").forEach(btn => {
+    btn.addEventListener("click", () => setMode(btn.dataset.mode));
+  });
 
   document.querySelectorAll("[data-close]").forEach(n => n.addEventListener("click", closeModals));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModals(); });
 
   el.inputWish.addEventListener("input", () => { el.wishLen.textContent = el.inputWish.value.length; });
   el.wishForm.addEventListener("submit", onSubmit);
+  el.foodInputDesc.addEventListener("input", () => { el.foodDescLen.textContent = el.foodInputDesc.value.length; });
+  el.foodForm.addEventListener("submit", onFoodSubmit);
 }
 
 /* =========================================================
@@ -401,8 +658,10 @@ function bindEvents() {
    ========================================================= */
 function init() {
   document.body.dataset.view = "intro";   // 초기 뷰 표시
+  document.body.dataset.mode = "wish";    // 초기 지도 모드
   fillSelectOptions();
   bindEvents();
   loadWishes();   // 시작하자마자 데이터 로드 (지도 열면 바로 보이도록)
+  loadFoods();    // 맛집 데이터도 함께 로드
 }
 document.addEventListener("DOMContentLoaded", init);

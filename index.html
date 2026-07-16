@@ -17,6 +17,10 @@
   <meta name="description" content="제주의 여덟 지역에 소원을 남기고, 지도에서 지역별로 쌓인 소원을 만나보세요." />
   <title>언젠가, 제주 </title>
 
+  <!-- 파비콘 (제주 감귤) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
   <!-- Leaflet (지도 라이브러리) — GitHub Pages에서 CDN으로 로드 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -81,6 +85,21 @@
               <stop offset="0.5"  stop-color="#daeaca"/>
               <stop offset="1"    stop-color="#c9dfb7"/>
             </linearGradient>
+
+            <!-- 재사용할 폭신한 구름 한 덩이 (흰 채움 + 손그림 외곽선 + 음영) -->
+            <g id="cloud">
+              <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="#ffffff"/>
+              <path class="ln" stroke-width="2" d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="none"/>
+              <path class="cloud-shade" d="M14,31 C24,35 40,35 52,31"/>
+              <path class="cloud-shade" d="M40,25 C48,29 60,29 66,25" opacity="0.5"/>
+            </g>
+
+            <!-- 불규칙한 현무암 돌 5종 (0,0 중심) — 돌담에서 회전·크기를 달리해 재사용 -->
+            <path id="stoneA" d="M-62,-2 C-60,-22 -40,-34 -14,-36 C12,-38 40,-30 56,-14 C68,-2 64,16 48,28 C28,40 -4,40 -30,32 C-52,25 -63,14 -62,-2 Z"/>
+            <path id="stoneB" d="M-66,2 C-66,-16 -44,-30 -16,-32 C16,-34 46,-26 62,-10 C70,0 66,18 46,28 C22,38 -10,38 -38,30 C-58,24 -66,14 -66,2 Z"/>
+            <path id="stoneC" d="M-58,-8 C-58,-26 -34,-36 -8,-34 C22,-32 52,-24 60,-6 C66,8 58,24 38,32 C14,40 -18,38 -42,28 C-56,22 -58,6 -58,-8 Z"/>
+            <path id="stoneD" d="M-64,4 C-66,-14 -48,-30 -20,-34 C10,-38 38,-28 54,-16 C70,-4 66,16 50,26 C30,38 0,42 -28,34 C-52,27 -62,18 -64,4 Z"/>
+            <path id="stoneE" d="M-56,0 C-56,-20 -36,-32 -10,-32 C18,-32 46,-22 58,-8 C66,4 60,22 42,30 C20,38 -12,38 -36,30 C-52,24 -56,12 -56,0 Z"/>
           </defs>
 
           <g filter="url(#sketch)">
@@ -91,12 +110,19 @@
 
             <!-- 먼 하늘: 해 · 구름 · 새 -->
             <g class="layer" data-depth="0.03">
-              <circle cx="1130" cy="150" r="58" fill="#fff2cf"/>
+              <!-- 해 (단색) -->
+              <circle cx="1130" cy="150" r="58" fill="#ffdf8a"/>
               <circle cx="1130" cy="150" r="58" fill="none" class="ln" stroke-width="2"/>
-              <path class="ln" d="M150,170 q26,-22 54,-4 q22,-24 56,-6 q26,4 20,22 l-140,0 q-16,-14 10,-12"/>
-              <path class="ln" d="M470,120 q22,-18 46,-2 q20,-20 48,-4 q22,4 16,20 l-120,0 q-14,-12 10,-14"/>
-              <path class="ln" d="M760,90 q10,-10 20,0 q10,-10 20,0"/>
-              <path class="ln" d="M830,110 q10,-10 20,0 q10,-10 20,0"/>
+
+              <!-- 구름 (원근감: 크게→작게) -->
+              <use href="#cloud" transform="translate(150,116) scale(1.45)"/>
+              <use href="#cloud" transform="translate(486,92) scale(1.02)"/>
+              <use href="#cloud" transform="translate(704,150) scale(0.72)" opacity="0.9"/>
+
+              <!-- 새 (크기 차이로 원근감) -->
+              <path class="ln" d="M812,104 q12,-12 24,0 q12,-12 24,0"/>
+              <path class="ln" d="M884,126 q9,-9 18,0 q9,-9 18,0"/>
+              <path class="ln" d="M862,90 q7,-7 14,0 q7,-7 14,0" opacity="0.7"/>
             </g>
 
             <!-- 한라산 (원경 · 손그림 스케치) -->
@@ -2775,10 +2801,10 @@
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250" style="width: 100px; height: auto;">
             <g class="layer" transform="translate(195,140) scale(0.4)">
               
-              <path fill="#9d9d9d" 
+              <path fill="#8b8893" stroke="#43404b" stroke-width="4" stroke-linejoin="round"
                     d="M70,30 C130,30 130,40 135,45 C155,45 155,65 140,75 C140,80 165,100 170,140 C175,190 155,240 100,240 C45,240 25,190 30,140 C35,100 60,80 60,75 C45,65 45,45 65,45 C70,40 70,30 70,30 Z"/>
 
-              <g fill="none" stroke="#5d5d5d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+              <g fill="none" stroke="#4a4852" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
                 
                 <path d="M 60,48 C 80,50 120,50 142,48" />
                 
@@ -2793,7 +2819,7 @@
                 <path d="M 155,205 C 130,205 120,200 115,175 C 110,155 120,145 125,155" />
               </g>
 
-              <g fill="#5d5d5d">
+              <g fill="#4a4852">
                 <circle cx="100" cy="38" r="2.2" />
                 <circle cx="80" cy="55" r="2.2" />
                 <circle cx="125" cy="45" r="2.2" />
@@ -2821,48 +2847,48 @@
               <rect x="-20" y="575" width="1480" height="250" fill="#211f26"/>
 
               <!-- 윗줄 -->
-              <ellipse class="stone" fill="#6f6c77" cx="0"    cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#5e5b67" cx="120"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#787582" cx="240"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#656271" cx="360"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#6f6c77" cx="480"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#5e5b67" cx="600"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#787582" cx="720"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#656271" cx="840"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#6f6c77" cx="960"  cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#5e5b67" cx="1080" cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#787582" cx="1200" cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#656271" cx="1320" cy="600" rx="66" ry="40"/>
-              <ellipse class="stone" fill="#6f6c77" cx="1440" cy="600" rx="66" ry="40"/>
+              <use href="#stoneA" class="stone" fill="#6f6c77" transform="translate(0,600) rotate(-6) scale(1.02)"/>
+              <use href="#stoneB" class="stone" fill="#5e5b67" transform="translate(120,600) rotate(8) scale(1.06)"/>
+              <use href="#stoneC" class="stone" fill="#787582" transform="translate(240,600) rotate(-12) scale(0.99)"/>
+              <use href="#stoneD" class="stone" fill="#656271" transform="translate(360,600) rotate(5) scale(1.05)"/>
+              <use href="#stoneE" class="stone" fill="#6f6c77" transform="translate(480,600) rotate(10) scale(1.0)"/>
+              <use href="#stoneA" class="stone" fill="#5e5b67" transform="translate(600,600) rotate(-8) scale(1.04)"/>
+              <use href="#stoneB" class="stone" fill="#787582" transform="translate(720,600) rotate(4) scale(0.98)"/>
+              <use href="#stoneC" class="stone" fill="#656271" transform="translate(840,600) rotate(-14) scale(1.06)"/>
+              <use href="#stoneD" class="stone" fill="#6f6c77" transform="translate(960,600) rotate(7) scale(1.01)"/>
+              <use href="#stoneE" class="stone" fill="#5e5b67" transform="translate(1080,600) rotate(-4) scale(1.03)"/>
+              <use href="#stoneA" class="stone" fill="#787582" transform="translate(1200,600) rotate(12) scale(1.0)"/>
+              <use href="#stoneB" class="stone" fill="#656271" transform="translate(1320,600) rotate(-6) scale(1.05)"/>
+              <use href="#stoneC" class="stone" fill="#6f6c77" transform="translate(1440,600) rotate(3) scale(0.99)"/>
 
               <!-- 가운뎃줄 (엇갈리게) -->
-              <ellipse class="stone" fill="#5e5b67" cx="60"   cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#787582" cx="180"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#656271" cx="300"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#6f6c77" cx="420"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#5e5b67" cx="540"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#787582" cx="660"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#656271" cx="780"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#6f6c77" cx="900"  cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#5e5b67" cx="1020" cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#787582" cx="1140" cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#656271" cx="1260" cy="662" rx="68" ry="42"/>
-              <ellipse class="stone" fill="#6f6c77" cx="1380" cy="662" rx="68" ry="42"/>
+              <use href="#stoneD" class="stone" fill="#5e5b67" transform="translate(60,662) rotate(7) scale(1.08)"/>
+              <use href="#stoneE" class="stone" fill="#787582" transform="translate(180,662) rotate(-10) scale(1.05)"/>
+              <use href="#stoneA" class="stone" fill="#656271" transform="translate(300,662) rotate(4) scale(1.1)"/>
+              <use href="#stoneB" class="stone" fill="#6f6c77" transform="translate(420,662) rotate(-6) scale(1.04)"/>
+              <use href="#stoneC" class="stone" fill="#5e5b67" transform="translate(540,662) rotate(11) scale(1.07)"/>
+              <use href="#stoneD" class="stone" fill="#787582" transform="translate(660,662) rotate(-3) scale(1.11)"/>
+              <use href="#stoneE" class="stone" fill="#656271" transform="translate(780,662) rotate(9) scale(1.03)"/>
+              <use href="#stoneA" class="stone" fill="#6f6c77" transform="translate(900,662) rotate(-13) scale(1.08)"/>
+              <use href="#stoneB" class="stone" fill="#5e5b67" transform="translate(1020,662) rotate(5) scale(1.06)"/>
+              <use href="#stoneC" class="stone" fill="#787582" transform="translate(1140,662) rotate(-7) scale(1.09)"/>
+              <use href="#stoneD" class="stone" fill="#656271" transform="translate(1260,662) rotate(10) scale(1.04)"/>
+              <use href="#stoneE" class="stone" fill="#6f6c77" transform="translate(1380,662) rotate(-4) scale(1.07)"/>
 
               <!-- 아랫줄 -->
-              <ellipse class="stone" fill="#787582" cx="0"    cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#656271" cx="120"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#6f6c77" cx="240"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#5e5b67" cx="360"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#787582" cx="480"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#656271" cx="600"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#6f6c77" cx="720"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#5e5b67" cx="840"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#787582" cx="960"  cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#656271" cx="1080" cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#6f6c77" cx="1200" cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#5e5b67" cx="1320" cy="728" rx="70" ry="44"/>
-              <ellipse class="stone" fill="#787582" cx="1440" cy="728" rx="70" ry="44"/>
+              <use href="#stoneC" class="stone" fill="#787582" transform="translate(0,728) rotate(-8) scale(1.1)"/>
+              <use href="#stoneD" class="stone" fill="#656271" transform="translate(120,728) rotate(5) scale(1.13)"/>
+              <use href="#stoneE" class="stone" fill="#6f6c77" transform="translate(240,728) rotate(-12) scale(1.08)"/>
+              <use href="#stoneA" class="stone" fill="#5e5b67" transform="translate(360,728) rotate(9) scale(1.11)"/>
+              <use href="#stoneB" class="stone" fill="#787582" transform="translate(480,728) rotate(-4) scale(1.09)"/>
+              <use href="#stoneC" class="stone" fill="#656271" transform="translate(600,728) rotate(11) scale(1.12)"/>
+              <use href="#stoneD" class="stone" fill="#6f6c77" transform="translate(720,728) rotate(-7) scale(1.07)"/>
+              <use href="#stoneE" class="stone" fill="#5e5b67" transform="translate(840,728) rotate(3) scale(1.1)"/>
+              <use href="#stoneA" class="stone" fill="#787582" transform="translate(960,728) rotate(-10) scale(1.13)"/>
+              <use href="#stoneB" class="stone" fill="#656271" transform="translate(1080,728) rotate(6) scale(1.08)"/>
+              <use href="#stoneC" class="stone" fill="#6f6c77" transform="translate(1200,728) rotate(-14) scale(1.11)"/>
+              <use href="#stoneD" class="stone" fill="#5e5b67" transform="translate(1320,728) rotate(8) scale(1.09)"/>
+              <use href="#stoneE" class="stone" fill="#787582" transform="translate(1440,728) rotate(-5) scale(1.12)"/>
 
               <!-- 현무암 구멍(기공) -->
               <circle class="pore" cx="70"   cy="594" r="4"/><circle class="pore" cx="300"  cy="606" r="3"/>
@@ -2897,8 +2923,13 @@
     <!-- ②  지도 페이지 -->
     <section class="view view--map" id="view-map">
       <div class="map-head">
-        <h2 class="map-head__title">제주 소원 지도</h2>
-        <p class="map-head__sub">지역을 누르면 그곳에 쌓인 소원을 볼 수 있어요. 숫자는 소원 개수예요.</p>
+        <h2 class="map-head__title" id="mapTitle">제주 소원 지도</h2>
+        <p class="map-head__sub" id="mapSub">지역을 누르면 그곳에 쌓인 소원을 볼 수 있어요. 숫자는 소원 개수예요.</p>
+        <!-- 소원 지도 ↔ 맛집 지도 전환 스위치 -->
+        <div class="mode-switch" role="group" aria-label="지도 종류 선택">
+          <button type="button" class="mode-switch__btn is-on" data-mode="wish">🍊 소원 지도</button>
+          <button type="button" class="mode-switch__btn" data-mode="food">🍽️ 맛집 지도</button>
+        </div>
       </div>
 
       <!-- Leaflet 지도가 들어갈 곳 -->
@@ -2914,12 +2945,19 @@
 
     <!-- ③  지역별 소원 페이지 -->
     <section class="view view--region" id="view-region">
+      <!-- 지역 테마 배경 일러스트 (assets/region-*.svg, script.js가 교체) -->
+      <div class="region-bg" aria-hidden="true">
+        <img id="regionBg" alt="" />
+      </div>
+
       <button class="region-back" data-go="map" type="button">← 지도로</button>
 
       <header class="region-head">
-        <p class="region-head__eyebrow">JEJU · <span id="regionEn">REGION</span></p>
-        <h2 class="region-head__title" id="regionName">지역 이름</h2>
-        <p class="region-head__count"><strong id="regionCount">0</strong>개의 소원이 맺혔어요</p>
+        <div class="region-head__panel">
+          <p class="region-head__eyebrow">JEJU · <span id="regionEn">REGION</span></p>
+          <h2 class="region-head__title" id="regionName">지역 이름</h2>
+          <p class="region-head__count"><strong id="regionCount">0</strong><span id="regionCountSuffix">개의 소원이 맺혔어요</span></p>
+        </div>
       </header>
 
       <!-- 소원 감귤이 맺히는 돌담 벽 -->
@@ -2933,8 +2971,8 @@
   </main>
 
   <!-- ===== 소원 남기기 플로팅 버튼 ===== -->
-  <button class="fab" id="openFormBtn" type="button" aria-label="소원 남기기">
-    <span class="fab__plus">＋</span> 소원 남기기
+  <button class="fab" id="openFormBtn" type="button" aria-label="남기기">
+    <span class="fab__plus">＋</span> <span id="fabLabel">소원 남기기</span>
   </button>
 
   <!-- ===== 소원 상세 모달 ===== -->
@@ -2987,6 +3025,61 @@
         </div>
         <p class="form__message is-hidden" id="formMessage"></p>
         <button type="submit" class="btn btn--primary" id="submitBtn">감귤 톡! 맺기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== 맛집 상세 모달 ===== -->
+  <div class="modal is-hidden" id="foodModal" role="dialog" aria-modal="true" aria-labelledby="foodName">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card modal__card--wish">
+      <button class="modal__close" data-close type="button" aria-label="닫기">✕</button>
+      <div class="wish-fruit" id="foodEmoji">🍽️</div>
+      <p class="wish-region" id="foodRegion">—</p>
+      <p class="wish-meta" id="foodName">—</p>
+      <p class="food-badge" id="foodCategory">—</p>
+      <p class="wish-text" id="foodDesc">—</p>
+    </div>
+  </div>
+
+  <!-- ===== 맛집 입력 모달 ===== -->
+  <div class="modal is-hidden" id="foodFormModal" role="dialog" aria-modal="true" aria-labelledby="foodFormTitle">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__card modal__card--form">
+      <button class="modal__close" data-close type="button" aria-label="닫기">✕</button>
+      <h2 class="form__title" id="foodFormTitle">맛집을 추가해요 🍽️</h2>
+      <p class="form__desc">나만 아는 제주 맛집을 지도에 콕 찍어주세요.</p>
+
+      <form id="foodForm" class="form">
+        <div class="form__grid">
+          <div class="form__row">
+            <label for="foodInputRegion">지역</label>
+            <select id="foodInputRegion" name="region" required>
+              <option value="" disabled selected>어느 지역인가요?</option>
+              <!-- script.js가 지역 목록을 채웁니다 -->
+            </select>
+          </div>
+          <div class="form__row">
+            <label for="foodInputCategory">종류</label>
+            <select id="foodInputCategory" name="category" required>
+              <option value="" disabled selected>선택</option>
+              <!-- script.js가 카테고리를 채웁니다 -->
+            </select>
+          </div>
+        </div>
+        <div class="form__row">
+          <label for="foodInputName">가게 이름</label>
+          <input type="text" id="foodInputName" name="name" maxlength="30"
+                 placeholder="예) 올레분식" required />
+        </div>
+        <div class="form__row">
+          <label for="foodInputDesc">추천 메뉴 · 한 줄 소개</label>
+          <textarea id="foodInputDesc" name="desc" maxlength="60" rows="2"
+                    placeholder="고등어쌈밥이 예술이에요" required></textarea>
+          <span class="form__hint"><span id="foodDescLen">0</span>/60</span>
+        </div>
+        <p class="form__message is-hidden" id="foodFormMessage"></p>
+        <button type="submit" class="btn btn--primary btn--food" id="foodSubmitBtn">맛집 콕! 찍기</button>
       </form>
     </div>
   </div>

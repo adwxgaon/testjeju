@@ -1,0 +1,87 @@
+<!-- 한림·협재 — 협재 해수욕장 (에메랄드 바다 + 비양도) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <filter id="sk"><feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+    <g id="cloud">
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="#ffffff"/>
+      <path d="M10,36 C1,36 -5,27 2,21 C-1,10 12,4 20,11 C25,-1 44,-2 50,9 C61,3 75,10 71,22 C82,23 82,36 71,36 Z" fill="none" stroke="#40514a" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <rect width="1440" height="760" fill="#e3f1fb"/>
+  <g filter="url(#sk)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 해 · 구름 · 새 -->
+    <circle cx="250" cy="120" r="54" fill="#ffdf8a" stroke="#40514a" stroke-width="2"/>
+    <use href="#cloud" transform="translate(560,80) scale(1.2)"/>
+    <use href="#cloud" transform="translate(940,60) scale(0.9)"/>
+    <use href="#cloud" transform="translate(1200,140) scale(0.72)"/>
+    <path d="M760,150 q12,-12 24,0 q12,-12 24,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+    <path d="M840,120 q9,-9 18,0 q9,-9 18,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+
+    <!-- 비양도 -->
+    <path d="M950,296 C1000,254 1070,238 1110,236 C1170,238 1230,268 1258,296 Z" fill="#9db98a" stroke="#40514a" stroke-width="2.2"/>
+    <path d="M1080,252 C1092,244 1108,244 1118,252" fill="none" stroke="#7f9a6a" stroke-width="2"/>
+    <path d="M1000,270 C1020,262 1044,260 1062,264" fill="none" stroke="#7f9a6a" stroke-width="1.8" opacity="0.7"/>
+
+    <!-- 에메랄드 바다 (협재의 3단 물빛) -->
+    <rect x="-20" y="296" width="1480" height="70" fill="#7ecfe0"/>
+    <rect x="-20" y="366" width="1480" height="90" fill="#74dcc8"/>
+    <rect x="-20" y="456" width="1480" height="86" fill="#a5ecd9"/>
+    <line x1="-20" y1="296" x2="1460" y2="296" stroke="#69b8cc" stroke-width="2.5"/>
+    <path d="M100,336 q18,-7 36,0 M330,320 q18,-7 36,0 M620,340 q18,-7 36,0 M900,326 q18,-7 36,0 M1280,338 q18,-7 36,0" fill="none" stroke="#ffffff" stroke-width="2.4" opacity="0.9"/>
+    <path d="M180,406 q20,-8 40,0 M480,392 q20,-8 40,0 M760,412 q20,-8 40,0 M1060,396 q20,-8 40,0 M1330,414 q20,-8 40,0" fill="none" stroke="#ffffff" stroke-width="2.4" opacity="0.9"/>
+    <path d="M90,492 q22,-8 44,0 M420,506 q22,-8 44,0 M720,488 q22,-8 44,0 M1020,508 q22,-8 44,0 M1300,494 q22,-8 44,0" fill="none" stroke="#ffffff" stroke-width="2.4" opacity="0.9"/>
+
+    <!-- 튜브 탄 사람 -->
+    <g transform="translate(880,440)">
+      <circle r="26" fill="#ff9a3d" stroke="#40514a" stroke-width="2.4"/>
+      <circle r="12" fill="#74dcc8" stroke="#40514a" stroke-width="2"/>
+      <circle cx="0" cy="-16" r="9" fill="#ffdfc2" stroke="#40514a" stroke-width="2"/>
+      <path d="M-9,-20 q9,-8 18,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+    </g>
+
+    <!-- 파도 거품이 닿는 모래 경계 -->
+    <path d="M-20,542 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 L1460,760 L-20,760 Z" fill="#faeecd"/>
+    <path d="M-20,542 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0 q30,14 60,0" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.95"/>
+
+    <!-- 모래 알갱이 -->
+    <circle cx="160" cy="620" r="3" fill="#e3cd9c"/><circle cx="340" cy="668" r="2.4" fill="#e3cd9c"/>
+    <circle cx="540" cy="612" r="3" fill="#e3cd9c"/><circle cx="760" cy="700" r="2.6" fill="#e3cd9c"/>
+    <circle cx="960" cy="640" r="3" fill="#e3cd9c"/><circle cx="1180" cy="690" r="2.4" fill="#e3cd9c"/>
+    <circle cx="1340" cy="620" r="3" fill="#e3cd9c"/><circle cx="80" cy="706" r="2.6" fill="#e3cd9c"/>
+
+    <!-- 발자국 -->
+    <g fill="#e0c896">
+      <ellipse cx="600" cy="600" rx="7" ry="11" transform="rotate(14 600 600)"/>
+      <ellipse cx="628" cy="632" rx="7" ry="11" transform="rotate(10 628 632)"/>
+      <ellipse cx="650" cy="666" rx="7" ry="11" transform="rotate(14 650 666)"/>
+      <ellipse cx="678" cy="698" rx="7" ry="11" transform="rotate(10 678 698)"/>
+    </g>
+
+    <!-- 불가사리 · 조개 -->
+    <path d="M1050,660 l7,16 17,2 -12,12 3,17 -15,-8 -15,8 3,-17 -12,-12 17,-2 Z" fill="#ff9a3d" stroke="#40514a" stroke-width="2"/>
+    <path d="M420,700 a14,14 0 0 1 28,0 Z" fill="#ffe4de" stroke="#40514a" stroke-width="2"/>
+    <path d="M434,700 L434,688 M427,700 L424,690 M441,700 L444,690" stroke="#40514a" stroke-width="1.6"/>
+
+    <!-- 파라솔 + 돗자리 -->
+    <g transform="translate(280,470)">
+      <path d="M-108,84 Q0,-16 108,84 Z" fill="#ff5f4e" stroke="#40514a" stroke-width="2.4"/>
+      <path d="M-74,50 Q0,0 74,50" fill="none" stroke="#ffffff" stroke-width="8"/>
+      <path d="M-36,22 Q0,4 36,22" fill="none" stroke="#ffffff" stroke-width="7"/>
+      <line x1="0" y1="8" x2="0" y2="212" stroke="#40514a" stroke-width="4.5"/>
+      <g transform="translate(48,168)">
+        <rect x="0" y="0" width="190" height="88" rx="8" fill="#fff6e6" stroke="#40514a" stroke-width="2.4" transform="skewX(-12)"/>
+        <line x1="30" y1="0" x2="12" y2="88" stroke="#7ecfe0" stroke-width="7"/>
+        <line x1="70" y1="0" x2="52" y2="88" stroke="#7ecfe0" stroke-width="7"/>
+        <line x1="110" y1="0" x2="92" y2="88" stroke="#7ecfe0" stroke-width="7"/>
+        <line x1="150" y1="0" x2="132" y2="88" stroke="#7ecfe0" stroke-width="7"/>
+      </g>
+      <!-- 모래성 양동이 -->
+      <g transform="translate(-150,210)">
+        <path d="M-20,0 L20,0 L14,34 L-14,34 Z" fill="#f5cf3a" stroke="#40514a" stroke-width="2.2"/>
+        <path d="M-20,0 Q0,-18 20,0" fill="none" stroke="#40514a" stroke-width="2.4"/>
+      </g>
+    </g>
+  </g>
+</svg>
