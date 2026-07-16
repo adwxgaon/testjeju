@@ -71,7 +71,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 8px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
   }
   .slide.cover::before, .slide.closing::before { display: none; }
 
@@ -107,7 +107,7 @@
   .cover { align-items: flex-start; justify-content: center; }
   .cover .bar {
     width: 88px; height: 10px; border-radius: 6px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background: var(--primary);
     margin-bottom: 0.9em;
   }
   .cover .title {
@@ -161,7 +161,7 @@
   /* ===== 마무리 ===== */
   .closing {
     align-items: center; text-align: center;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-d) 100%);
+    background: var(--primary-d);
     color: #fff;
   }
   .closing .big { font-size: 3em; font-weight: 900; line-height: 1.2; word-break: keep-all; }
@@ -216,7 +216,7 @@ const SLIDES = [
     type: "cover",
     title: "언젠가, 제주",
     subtitle: "감귤나무에 열리는 소원",
-    meta: "웹 프로젝트 발표<br>신소재공학부 · 발표자 이름<br>2026. 07. 16.",
+    meta: "웹 프로젝트 발표<br>신소재공학부 · 조가온",
   },
   {
     type: "toc",
@@ -224,8 +224,7 @@ const SLIDES = [
     items: [
       "프로젝트 기획과 콘셉트",
       "사용자 경험 흐름",
-      "시스템 구조와 핵심 기술",
-      "배운 점과 한계",
+      "시스템 구조와 MBTI 필터",
     ],
   },
   {
@@ -269,24 +268,6 @@ const SLIDES = [
         { label: "ENTJ", value: 5 },
       ],
     },
-  },
-  {
-    type: "content",
-    kicker: "03 · 핵심 기술 ①",
-    headline: "CORS의 벽을 <span class=\"hl\">한 줄</span>로 넘다",
-    body: "브라우저가 JSON POST 앞에 보내는 <strong>preflight 요청</strong>을 Apps Script가 처리하지 못해 저장이 막혔습니다. 요청을 <strong>text/plain</strong>으로 보내고 서버에서 다시 파싱하는 표준 방법으로 해결했습니다.",
-  },
-  {
-    type: "content",
-    kicker: "03 · 핵심 기술 ②",
-    headline: "작지만 중요한 <span class=\"hl\">디테일 두 가지</span>",
-    body: "· <strong>결정적 의사난수</strong>로 감귤 위치를 계산 — 새로고침해도 감귤이 흔들리지 않습니다.<br>· <strong>낙관적 업데이트</strong> — 서버 응답을 기다리지 않고 감귤을 바로 그려 \"톡!\" 하는 즉각적인 경험을 줍니다.",
-  },
-  {
-    type: "content",
-    kicker: "04 · 회고",
-    headline: "배운 점, 그리고 <span class=\"hl\">남은 과제</span>",
-    body: "· 프레임워크 없이도 CSS·SVG만으로 감성적인 UI를 만들 수 있었습니다.<br>· 브라우저 보안(CORS)을 직접 부딪히며 이해했습니다.<br>· 한계: 소원 삭제·신고 기능이 없어, 운영을 위한 <strong>관리 기능</strong>이 다음 과제입니다.",
   },
   {
     type: "closing",
