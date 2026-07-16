@@ -11,7 +11,7 @@
    (스프레드시트에 '지역' 컬럼을 추가하고 Code.gs를 새 버전으로
     재배포한 뒤, URL이 바뀌면 여기만 갈아끼우면 됩니다.)
    --------------------------------------------------------- */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGmToUEP1WTbtxBFhO6uSwIGgnjkZcaeTHSj4UwIpYQwFXmhJEfvXq5bI8WIAH9bVu2A/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDDfv5Cknt_5D0BI5Mcb-UtKA6Z3tgq1rPZ57cPtyRi7wbs1Z7EThSjotGYxTClALqfg/exec";
 
 /* ----- 제주 지역 정의 (지도 마커 좌표 + 영문 라벨) ----- */
 const REGIONS = [
