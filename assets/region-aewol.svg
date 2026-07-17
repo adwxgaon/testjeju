@@ -62,12 +62,12 @@
       <rect x="140" y="316" width="260" height="226" fill="#fff6e6" stroke="#40514a" stroke-width="2.4"/>
       <line x1="132" y1="316" x2="408" y2="316" stroke="#40514a" stroke-width="3"/>
       <rect x="168" y="336" width="204" height="52" rx="10" fill="#ffedd6" stroke="#40514a" stroke-width="2.2"/>
-      <g transform="translate(230,352)">
+      <g transform="translate(210,352)">
         <path d="M0,4 L26,4 L23,22 L3,22 Z" fill="#ff8c1a" stroke="#40514a" stroke-width="2"/>
         <path d="M26,8 q10,4 0,10" fill="none" stroke="#40514a" stroke-width="2"/>
         <path d="M8,-2 q3,-5 0,-8 M17,-2 q3,-5 0,-8" fill="none" stroke="#40514a" stroke-width="1.8"/>
       </g>
-      <text x="292" y="372" font-family="sans-serif" font-size="24" font-weight="bold" fill="#5c4a3a">COFFEE</text>
+      <text x="289" y="372" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="bold" fill="#5c4a3a">COFFEE</text>
       <!-- 차양 -->
       <g>
         <path d="M150,404 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 L390,398 L150,398 Z" fill="#ff9a3d" stroke="#40514a" stroke-width="2"/>
@@ -87,7 +87,7 @@
       <circle cx="546" cy="330" r="30" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
       <line x1="516" y1="330" x2="576" y2="330" stroke="#40514a" stroke-width="1.6"/>
       <line x1="546" y1="300" x2="546" y2="360" stroke="#40514a" stroke-width="1.6"/>
-      <text x="490" y="405" font-family="sans-serif" font-size="30" font-weight="bold" letter-spacing="6" fill="#8a5a50">CAFE</text>
+      <text x="549" y="405" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="bold" letter-spacing="6" fill="#8a5a50">CAFE</text>
       <path d="M440,430 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0 L660,424 L440,424 Z" fill="#ffffff" stroke="#40514a" stroke-width="2"/>
       <rect x="452" y="452" width="60" height="60" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
       <rect x="586" y="452" width="60" height="60" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
@@ -104,7 +104,7 @@
       <rect x="724" y="340" width="200" height="202" fill="#e2f2e4" stroke="#40514a" stroke-width="2.4"/>
       <line x1="716" y1="340" x2="932" y2="340" stroke="#40514a" stroke-width="3"/>
       <rect x="744" y="358" width="160" height="42" rx="9" fill="#ffffff" stroke="#40514a" stroke-width="2.2"/>
-      <text x="768" y="388" font-family="sans-serif" font-size="22" font-weight="bold" fill="#3f7d63">BAKERY</text>
+      <text x="824" y="388" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#3f7d63">BAKERY</text>
       <path d="M732,416 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 q10,13 20,0 L924,410 L732,410 Z" fill="#5fae8f" stroke="#40514a" stroke-width="2"/>
       <rect x="742" y="440" width="66" height="60" fill="#cfe7f0" stroke="#40514a" stroke-width="2.2"/>
       <rect x="838" y="446" width="44" height="96" fill="#c96f4a" stroke="#40514a" stroke-width="2.2"/>

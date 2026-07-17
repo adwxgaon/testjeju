@@ -10,7 +10,7 @@
     </linearGradient>
     <!-- 한라산 본체 명암 -->
     <linearGradient id="mtn" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0" stop-color="#f0f6ea"/><stop offset="0.45" stop-color="#dcecca"/><stop offset="1" stop-color="#bcd6a4"/>
+      <stop offset="0" stop-color="#d3ebb4"/><stop offset="0.45" stop-color="#a9d183"/><stop offset="1" stop-color="#7fae5a"/>
     </linearGradient>
     <!-- 좌측(음지) 그림자용 -->
     <linearGradient id="mtnShade" x1="0" y1="0" x2="1" y2="0.3">
@@ -71,46 +71,27 @@
     <path d="M400,152 q9,-9 18,0 q9,-9 18,0" fill="none" stroke="#40514a" stroke-width="2.2"/>
     <path d="M360,205 q7,-7 14,0 q7,-7 14,0" fill="none" stroke="#40514a" stroke-width="2" opacity="0.75"/>
 
-    <!-- 먼 능선 (대기 원근: 가장 옅게) -->
-    <path d="M-20,470 C180,430 360,438 520,452 C700,468 760,452 900,442 C1080,430 1280,452 1460,470 L1460,520 L-20,520 Z" fill="url(#ridgeFar)" opacity="0.85"/>
-    <!-- 중간 능선 -->
-    <path d="M-20,500 C160,470 320,478 470,470 C560,466 620,440 700,420 C760,406 800,418 860,432 C1000,464 1240,486 1460,500 L1460,540 L-20,540 Z" fill="url(#ridgeMid)" opacity="0.9"/>
+    <!-- 한라산 본체 (시작페이지 산 이식) -->
+    <path d="M-20,432 C180,400 360,390 470,382 C560,376 632,366 700,336 C752,314 794,294 828,282 C838,280 846,284 850,288 C856,284 866,280 872,282 C918,292 1000,322 1084,350 C1200,388 1320,402 1400,408 C1430,410 1460,418 1460,432 L1460,760 L-20,760 Z" fill="url(#mtn)"/>
+    <!-- 좌측(음지) 음영 -->
+    <path d="M-20,432 C180,400 360,390 470,382 C560,376 632,366 700,336 C752,314 794,294 828,282 C838,280 846,284 850,288 L850,760 L-20,760 Z" fill="url(#mtnShade)"/>
+    <!-- 정상부 밝은 바위 자락 -->
+    <path d="M810,290 C826,279 866,279 880,292 C864,301 826,301 810,290 Z" fill="#f0f5ea" opacity="0.6"/>
+    <!-- 능선 윤곽선 -->
+    <path d="M-20,432 C180,400 360,390 470,382 C560,376 632,366 700,336 C752,314 794,294 828,282 C838,280 846,284 850,288 C856,284 866,280 872,282 C918,292 1000,322 1084,350 C1200,388 1320,402 1400,408 C1430,410 1460,418 1460,432" fill="none" stroke="#40514a" stroke-width="2.4"/>
 
-    <!-- 한라산 본체 -->
-    <path d="M-20,560 C160,520 340,490 470,462 C580,438 640,380 668,300 C684,252 700,222 716,214 C722,212 730,214 734,218 C740,214 748,212 754,214 C772,222 790,254 806,302 C836,388 900,444 1010,472 C1150,506 1320,532 1460,556 L1460,760 L-20,760 Z" fill="url(#mtn)"/>
-    <!-- 좌측 음영 -->
-    <path d="M-20,560 C160,520 340,490 470,462 C580,438 640,380 668,300 C684,252 700,222 716,214 L716,760 L-20,760 Z" fill="url(#mtnShade)"/>
-    <!-- 능선 외곽선 -->
-    <path d="M-20,560 C160,520 340,490 470,462 C580,438 640,380 668,300 C684,252 700,222 716,214 C722,212 730,214 734,218 C740,214 748,212 754,214 C772,222 790,254 806,302 C836,388 900,444 1010,472 C1150,506 1320,532 1460,556" fill="none" stroke="#40514a" stroke-width="2.6"/>
+    <!-- 백록담 분화구 살짝 팬 자국 -->
+    <path d="M826,286 C840,293 860,293 874,286" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.5"/>
 
-    <!-- 정상 눈자락(잔설) -->
-    <path d="M676,262 C700,250 744,250 766,264 C748,278 754,300 742,318 C732,300 710,300 700,318 C690,300 686,276 676,262 Z" fill="#f6fbf2" opacity="0.85"/>
-    <path d="M642,304 C664,296 690,300 704,312 C688,318 664,316 650,326 C648,318 644,310 642,304 Z" fill="#eef6e6" opacity="0.7"/>
-    <path d="M780,300 C800,294 826,300 838,314 C820,318 800,314 788,322 C786,314 784,306 780,300 Z" fill="#eef6e6" opacity="0.7"/>
+    <!-- 정상에서 뻗어내리는 골(계곡) 능선 -->
+    <path d="M834,300 C812,344 766,386 716,420" fill="none" stroke="#7f9a6a" stroke-width="1.6"/>
+    <path d="M848,300 C864,346 904,390 948,424" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.42"/>
+    <path d="M824,306 C770,340 698,370 638,406" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.34"/>
+    <path d="M860,304 C930,336 1018,370 1094,406" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.3"/>
 
-    <!-- 백록담 (분화구 호수) + 잔물결·하이라이트 -->
-    <ellipse cx="722" cy="224" rx="48" ry="11" fill="url(#lake)" stroke="#40514a" stroke-width="2.2"/>
-    <path d="M700,220 q10,4 22,4 q14,0 24,-4" fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.7"/>
-    <path d="M704,228 q12,3 20,3 q10,0 18,-2" fill="none" stroke="#bfe6f2" stroke-width="1.4" opacity="0.8"/>
-    <!-- 정상부 바위 -->
-    <path d="M664,246 C688,232 758,232 782,248 C758,258 688,258 664,246 Z" fill="#f0f5ea" opacity="0.6"/>
-    <path d="M690,244 l6,-6 6,6 M736,244 l6,-6 6,6" fill="none" stroke="#9db98a" stroke-width="1.6" opacity="0.6"/>
-
-    <!-- 골짜기 능선 -->
-    <path d="M704,240 C670,320 610,398 540,450" fill="none" stroke="#7f9a6a" stroke-width="1.8"/>
-    <path d="M742,240 C770,326 830,404 906,458" fill="none" stroke="#7f9a6a" stroke-width="1.8" opacity="0.6"/>
-    <path d="M690,252 C620,320 520,380 430,430" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.45"/>
-    <path d="M760,250 C850,320 970,388 1080,436" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.4"/>
-    <path d="M480,470 C640,430 830,428 980,468" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.5"/>
-    <path d="M380,510 C620,462 860,464 1090,506" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.35"/>
-    <!-- 우측 햇빛 하이라이트 -->
-    <path d="M812,320 C860,382 940,432 1030,462" fill="none" stroke="#f4faec" stroke-width="3" opacity="0.55"/>
-
-    <!-- 산허리 걸린 구름(안개 띠) -->
-    <ellipse cx="470" cy="452" rx="150" ry="20" fill="#ffffff" opacity="0.5" filter="url(#soft)"/>
-    <ellipse cx="960" cy="470" rx="130" ry="16" fill="#ffffff" opacity="0.45" filter="url(#soft)"/>
-    <use href="#cloud" transform="translate(540,338) scale(1.05)" opacity="0.92"/>
-    <use href="#cloud" transform="translate(852,376) scale(0.8)" opacity="0.88"/>
+    <!-- 옅은 등고선 -->
+    <path d="M472,392 C622,360 802,356 968,392" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.4"/>
+    <path d="M562,420 C722,396 902,398 1062,424" fill="none" stroke="#7f9a6a" stroke-width="1.6" opacity="0.26"/>
 
     <!-- 오름 두 개 -->
     <path d="M110,600 C165,544 250,544 305,600 Z" fill="#bcd6a4" stroke="#40514a" stroke-width="2" opacity="0.95"/>
