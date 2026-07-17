@@ -11,7 +11,7 @@
    (스프레드시트에 '지역' 컬럼을 추가하고 Code.gs를 새 버전으로
     재배포한 뒤, URL이 바뀌면 여기만 갈아끼우면 됩니다.)
    --------------------------------------------------------- */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDDfv5Cknt_5D0BI5Mcb-UtKA6Z3tgq1rPZ57cPtyRi7wbs1Z7EThSjotGYxTClALqfg/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGmToUEP1WTbtxBFhO6uSwIGgnjkZcaeTHSj4UwIpYQwFXmhJEfvXq5bI8WIAH9bVu2A/exec";
 
 /* ----- 제주 지역 정의 (지도 마커 좌표 + 영문 라벨) ----- */
 const REGIONS = [
@@ -32,7 +32,7 @@ const MBTI_TYPES = [
   "ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP",
 ];
 
-/* ----- 맛집 카테고리 (기본 4종 + 제주 특화 3종) ----- */
+/* ----- 맛집 카테고리 (기본 4종 + 제주 특화 3종 + 카페) ----- */
 const FOOD_CATEGORIES = [
   { name: "한식",   emoji: "🍚" },
   { name: "중식",   emoji: "🥟" },
@@ -41,6 +41,7 @@ const FOOD_CATEGORIES = [
   { name: "흑돼지", emoji: "🐷" },
   { name: "횟집",   emoji: "🐟" },
   { name: "갈치집", emoji: "🐠" },
+  { name: "카페",   emoji: "☕" },
 ];
 const CATEGORY_BY_NAME = Object.fromEntries(FOOD_CATEGORIES.map(c => [c.name, c]));
 
@@ -75,6 +76,41 @@ const SEED_FOODS = [
   // 한라산
   { region: "한라산",     category: "한식",   name: "성미가든",          desc: "교래리 토종닭 샤브샤브와 닭죽 코스" },
   { region: "한라산",     category: "한식",   name: "교래손칼국수",      desc: "한라산 가는 길 메밀 손칼국수" },
+  // 카페(디저트)
+  { region: "애월",       category: "카페",   name: "카페한라산",        desc: "한라산 소다로 유명한 애월 오션뷰 카페" },
+  { region: "한림·협재",  category: "카페",   name: "봄날카페",          desc: "협재 바다를 배경으로 한 감성 카페의 원조" },
+  { region: "성산·우도",  category: "카페",   name: "블랑로쉐",          desc: "성산일출봉이 보이는 하얀 오션뷰 카페" },
+  { region: "서귀포",     category: "카페",   name: "카페베케",          desc: "정원과 통유리로 유명한 서귀포 디저트 카페" },
+  { region: "제주시",     category: "카페",   name: "미쁜제과",          desc: "제주 우유로 만든 크림빵·디저트 베이커리" },
+];
+
+/* ----- 기본 소원 데이터 (나이·MBTI는 임의값) ----- */
+const SEED_WISHES = [
+  // 애월
+  { region: "애월",      age: 26, mbti: "ENFP", wish: "애월 카페거리에서 소금빵 먹기" },
+  { region: "애월",      age: 31, mbti: "ISTP", wish: "애월항에서 딱새우 먹기" },
+  { region: "애월",      age: 24, mbti: "ESFJ", wish: "금능 해수욕장에서 수영하고 해녀의 집 가기" },
+  // 한림·협재
+  { region: "한림·협재", age: 29, mbti: "INFJ", wish: "협재 해수욕장에서 수영하고 노을 보며 저녁 먹기" },
+  { region: "한림·협재", age: 34, mbti: "ISFP", wish: "여유로운 아침에 바다뷰를 보며 브런치 먹기" },
+  { region: "한림·협재", age: 23, mbti: "ENFJ", wish: "카페 가서 바다뷰 인생샷 건지기" },
+  // 제주시
+  { region: "제주시",    age: 27, mbti: "ESTP", wish: "스쿠터 대여해서 맛집 투어 다니기" },
+  { region: "제주시",    age: 33, mbti: "ENTJ", wish: "번화가에서 흑돼지 먹고 분위기 있는 술집 가기" },
+  { region: "제주시",    age: 25, mbti: "ENFP", wish: "혼술바 가서 친구 사귀기" },
+  // 한라산
+  { region: "한라산",    age: 38, mbti: "ISTJ", wish: "겨울에 한라산 등반하기" },
+  { region: "한라산",    age: 41, mbti: "ESTJ", wish: "가볍게 등산하고 백숙에 막걸리 때리기" },
+  // 중문
+  { region: "중문",      age: 22, mbti: "INFP", wish: "주상절리와 함께 인증샷 남기기" },
+  // 서귀포
+  { region: "서귀포",    age: 28, mbti: "ISFJ", wish: "폭포에서 인증샷 남기기" },
+  { region: "서귀포",    age: 30, mbti: "ENTP", wish: "새연교에서 불꽃놀이 보기" },
+  // 표선·남원
+  { region: "표선·남원", age: 36, mbti: "ISFP", wish: "민속촌 가서 제주 전통 체험하기" },
+  // 성산·우도
+  { region: "성산·우도", age: 27, mbti: "INTJ", wish: "성산일출봉에서 일출 보기" },
+  { region: "성산·우도", age: 24, mbti: "ESFP", wish: "잠수함 타고 우도 가서 맛집탐방하기" },
 ];
 
 /* ----- DOM 참조 ----- */
@@ -100,6 +136,8 @@ const el = {
   regionBg:    document.getElementById("regionBg"),
   orchard:     document.getElementById("orchard"),
   regionEmpty: document.getElementById("regionEmpty"),
+  mbtiFilter:  document.getElementById("mbtiFilter"),
+  mbtiHighlightSelect: document.getElementById("mbtiHighlightSelect"),
   // 소원 상세 모달
   wishModal:   document.getElementById("wishModal"),
   wishRegion:  document.getElementById("wishRegion"),
@@ -146,12 +184,18 @@ let currentRegionId = null; // 지역 뷰에서 보고 있는 지역
 let map = null;             // Leaflet 지도 인스턴스
 let markers = {};          // 지역별 마커 캐시
 let dataLoaded = false;    // 데이터 최초 로드 여부
+let highlightMbti = "";    // 소원 뷰에서 강조할 MBTI ("" = 전체)
 
 const LOCAL_FOODS_KEY = "jeju_local_foods";
 
 // 화면에 보여줄 전체 맛집 = 기본(시드) + 서버 저장분 + 브라우저 저장분
 function allFoods() {
   return SEED_FOODS.concat(foods, localFoods);
+}
+
+// 화면에 보여줄 전체 소원 = 기본(시드) + 서버 저장분
+function allWishes() {
+  return SEED_WISHES.concat(wishes);
 }
 
 /* =========================================================
@@ -249,7 +293,7 @@ function setMode(mode) {
 
 // 지역별 개수를 세어 마커(뱃지) 생성/갱신 — 현재 모드 기준
 function renderMarkers() {
-  const counts = countByRegion(mapMode === "wish" ? wishes : allFoods());
+  const counts = countByRegion(mapMode === "wish" ? allWishes() : allFoods());
   const foodCls = mapMode === "food" ? " pin--food" : "";
 
   REGIONS.forEach(region => {
@@ -332,7 +376,7 @@ function enterRegion(regionId) {
 
 // 지역 페이지 — 소원 모드
 function renderRegionWishes(region) {
-  const list = wishes.filter(w => (w.region || "").trim() === region.name);
+  const list = allWishes().filter(w => (w.region || "").trim() === region.name);
   el.regionCount.textContent = list.length;
   el.regionCountSuffix.textContent = "개의 소원이 맺혔어요";
 
@@ -348,6 +392,7 @@ function renderRegionWishes(region) {
     const card = document.createElement("button");
     card.type = "button";
     card.className = "wish-card";
+    card.dataset.mbti = (item.mbti || "").trim().toUpperCase();
     card.style.animationDelay = (i % 10) * 0.04 + "s";
     card.innerHTML =
       `<div class="wish-card__fruit">🍊</div>
@@ -355,6 +400,19 @@ function renderRegionWishes(region) {
        <div class="wish-card__meta">${escapeHtml(String(item.age))}세 · ${escapeHtml(item.mbti)}</div>`;
     card.addEventListener("click", () => openWishModal(item, region));
     el.orchard.appendChild(card);
+  });
+
+  applyMbtiHighlight();
+}
+
+// 선택한 MBTI와 같은 소원 카드만 강조하고 나머지는 흐리게 처리
+function applyMbtiHighlight() {
+  const target = (highlightMbti || "").toUpperCase();
+  el.orchard.querySelectorAll(".wish-card").forEach(card => {
+    card.classList.remove("is-mbti-match", "is-mbti-dim");
+    if (!target) return;
+    if (card.dataset.mbti === target) card.classList.add("is-mbti-match");
+    else card.classList.add("is-mbti-dim");
   });
 }
 
@@ -621,6 +679,7 @@ function fillSelectOptions() {
     el.foodInputRegion.appendChild(new Option(r.name, r.name));
   });
   MBTI_TYPES.forEach(t => el.inputMbti.appendChild(new Option(t, t)));
+  MBTI_TYPES.forEach(t => el.mbtiHighlightSelect.appendChild(new Option(t, t)));
   FOOD_CATEGORIES.forEach(c => el.foodInputCategory.appendChild(new Option(c.emoji + " " + c.name, c.name)));
 }
 
@@ -646,6 +705,12 @@ function bindEvents() {
 
   document.querySelectorAll("[data-close]").forEach(n => n.addEventListener("click", closeModals));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModals(); });
+
+  // 같은 MBTI 강조 필터
+  el.mbtiHighlightSelect.addEventListener("change", () => {
+    highlightMbti = el.mbtiHighlightSelect.value;
+    applyMbtiHighlight();
+  });
 
   el.inputWish.addEventListener("input", () => { el.wishLen.textContent = el.inputWish.value.length; });
   el.wishForm.addEventListener("submit", onSubmit);

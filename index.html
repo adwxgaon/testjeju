@@ -36,6 +36,12 @@
       <feColorMatrix type="saturate" values="0" />
       <feComponentTransfer><feFuncA type="linear" slope="0.06" /></feComponentTransfer>
     </filter>
+
+    <!-- 연필 스케치 흔들림: 테두리를 살짝 손그림처럼 떨리게 (지도 상단바·전환버튼·말풍선) -->
+    <filter id="pencil" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.024" numOctaves="3" seed="6" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" />
+    </filter>
   </svg>
   <div class="grain" aria-hidden="true"></div>
 
@@ -2957,6 +2963,12 @@
           <p class="region-head__eyebrow">JEJU · <span id="regionEn">REGION</span></p>
           <h2 class="region-head__title" id="regionName">지역 이름</h2>
           <p class="region-head__count"><strong id="regionCount">0</strong><span id="regionCountSuffix">개의 소원이 맺혔어요</span></p>
+          <div class="mbti-filter" id="mbtiFilter">
+            <label class="mbti-filter__label" for="mbtiHighlightSelect">같은 MBTI 강조</label>
+            <select class="mbti-filter__select" id="mbtiHighlightSelect">
+              <option value="">전체 보기</option>
+            </select>
+          </div>
         </div>
       </header>
 

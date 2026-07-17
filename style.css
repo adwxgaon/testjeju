@@ -54,10 +54,19 @@ body {
 .brand { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; }
 .topnav { display: flex; gap: 6px; }
 .topnav__btn {
+  position: relative;
   font-size: 0.9rem; font-weight: 600;
   padding: 8px 16px; border-radius: 999px;
   color: var(--cream-soft);
   transition: color 0.2s, background 0.2s;
+}
+/* 버튼 밑 얇은 밑줄 (글자색을 따라감) */
+.topnav__btn::after {
+  content: "";
+  position: absolute;
+  left: 16px; right: 16px; bottom: 0;
+  height: 2px; border-radius: 1px;
+  background: currentColor; opacity: 0.85;
 }
 .topnav__btn:hover { color: var(--cream); background: rgba(255,255,255,0.07); }
 
@@ -182,12 +191,13 @@ body {
    ②  지도 페이지
    ========================================================= */
 .view--map { background: var(--basalt-0); }
-/* 상단 경계 바 — 브랜드("언젠가, 제주")·지도 버튼 영역만, "제주 소원 지도" 위까지 */
+/* 상단 경계 바 — 종이 톤 + 연필로 그은 듯 살짝 흔들리는 아래 경계선 */
 .view--map::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+  content: ""; position: absolute; top: 0; left: -14px; right: -14px; z-index: 10;
   height: 45px; pointer-events: none;
-  background: #ffffff;
-  border-bottom: 1px solid #dcdcdc;
+  background: #fbfaf6;
+  border-bottom: 2px solid #c8c8ce;
+  filter: url(#pencil);
 }
 .map-head {
   position: absolute; top: 60px; left: 0; right: 0; z-index: 20;
@@ -198,10 +208,17 @@ body {
 
 /* 소원 지도 ↔ 맛집 지도 전환 스위치 */
 .mode-switch {
+  position: relative;
   margin-top: 12px;
   display: inline-flex; gap: 4px; pointer-events: auto;
-  background: #ffffff; border: 1.5px solid #dcdcdc; border-radius: 999px;
+  background: #fbfaf6; border: none; border-radius: 999px;
   padding: 4px; box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+/* 연필로 그린 듯 살짝 흔들리는 테두리 (글자·알약은 또렷하게 유지) */
+.mode-switch::before {
+  content: ""; position: absolute; inset: 0;
+  border: 1.8px solid #b6b6bd; border-radius: 999px;
+  filter: url(#pencil); pointer-events: none;
 }
 .mode-switch__btn {
   border: none; background: transparent; cursor: pointer;
@@ -230,14 +247,15 @@ body[data-mode="food"] .map-head__sub { color: var(--food); }
 .pin {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: inherit; cursor: pointer;
-  background: #e4e4e6;
-  color: #2a2830; border: 1.5px solid #cfcfd3;
+  background: #efeee9;
+  color: #2a2830; border: 1.8px solid #7d7d85;
   padding: 6px 12px 6px 6px; border-radius: 999px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.22);
   white-space: nowrap;
+  filter: url(#pencil);           /* 연필로 그린 듯 살짝 흔들리는 말풍선 */
   transition: transform 0.15s var(--ease), border-color 0.15s, background 0.15s;
 }
-.pin:hover { transform: translateY(-2px) scale(1.04); border-color: var(--tangerine); background: #f0f0f2; }
+.pin:hover { transform: translateY(-2px) scale(1.04); border-color: var(--tangerine); background: #f6f5f1; }
 .pin__count {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 26px; height: 26px; padding: 0 7px;
@@ -249,11 +267,11 @@ body[data-mode="food"] .map-head__sub { color: var(--food); }
 /* 마커 아래 꼬리 */
 .pin::after {
   content: ""; position: absolute; left: 22px; bottom: -6px;
-  width: 12px; height: 12px; background: #e4e4e6;
-  border-right: 1.5px solid #cfcfd3; border-bottom: 1.5px solid #cfcfd3;
+  width: 12px; height: 12px; background: #efeee9;
+  border-right: 1.8px solid #7d7d85; border-bottom: 1.8px solid #7d7d85;
   transform: rotate(45deg);
 }
-.pin:hover::after { background: #f0f0f2; border-color: var(--tangerine); }
+.pin:hover::after { background: #f6f5f1; border-color: var(--tangerine); }
 
 /* 맛집 모드 마커 */
 .pin--food .pin__count { background: var(--food); color: #ffffff; }
@@ -357,7 +375,36 @@ body[data-mode="food"] .region-head__count strong { color: var(--food); }
   background: rgba(224,69,90,0.12); color: var(--food);
 }
 
-/* MBTI 강조(선택): 같은 유형이면 반짝 — 여기선 미사용이지만 확장 여지 */
+/* MBTI 강조 필터 바 */
+.mbti-filter {
+  margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+body[data-mode="food"] .mbti-filter { display: none; }
+.mbti-filter__label {
+  font-size: 0.8rem; font-weight: 700; color: var(--tangerine-d); letter-spacing: 0.02em;
+}
+.mbti-filter__select {
+  font-family: inherit; font-size: 0.82rem; font-weight: 700; color: #35443e;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,140,26,0.45); background: rgba(255,255,255,0.9);
+  cursor: pointer; transition: border-color 0.18s;
+}
+.mbti-filter__select:hover { border-color: var(--tangerine); }
+.mbti-filter__select:focus-visible { outline: 2px solid var(--tangerine); outline-offset: 2px; }
+
+/* MBTI 강조(선택): 같은 유형이면 반짝, 나머지는 흐리게 */
+.wish-card.is-mbti-dim { opacity: 0.4; filter: saturate(0.6); }
+.wish-card.is-mbti-match {
+  border-color: var(--tangerine);
+  box-shadow: 0 0 0 2px var(--tangerine), 0 16px 32px rgba(255,140,26,0.28);
+  transform: translateY(-2px);
+}
+.wish-card.is-mbti-match .wish-card__meta { color: var(--tangerine-d); }
+.wish-card.is-mbti-match::after {
+  content: "✦ 같은 MBTI"; position: absolute; top: 10px; right: 12px;
+  font-size: 0.68rem; font-weight: 800; color: var(--tangerine-d);
+  background: rgba(255,140,26,0.14); padding: 2px 8px; border-radius: 999px;
+}
 
 /* =========================================================
    공통 — 버튼 / FAB / 모달 / 상태

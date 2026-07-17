@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <!--
-  ============================================================
-  html-slides 템플릿 — 발표용 HTML 슬라이드
-  ------------------------------------------------------------
-  · 브라우저에서 열면 전체 화면 슬라이드로 보임
-  · ← / → (또는 Space) 로 넘김, F 로 전체화면, Home/End 처음·끝
-  · 아래 SLIDES 배열만 고치면 됩니다. (엔진 코드는 건드릴 필요 없음)
-  · 자체 완결형(self-contained): 외부 라이브러리·인터넷 불필요
-  ============================================================
+  언젠가, 제주 — 발표 슬라이드 (시작 → 지도 → 상세)
+  · 브라우저에서 열면 전체 화면 슬라이드
+  · ← / → (또는 Space) 넘김, F 전체화면, Home/End 처음·끝
+  · SLIDES 배열만 고치면 됩니다. (엔진 코드는 건드릴 필요 없음)
 -->
 <html lang="ko">
 <head>
@@ -15,17 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>언젠가, 제주 — 감귤나무에 열리는 소원</title>
 <style>
-  /* ===== 주황 계열 색상 팔레트 (색은 이 변수들로 통일) ===== */
   :root {
-    --bg:        #fff8f0;   /* 슬라이드 배경 (따뜻한 아이보리) */
-    --surface:   #ffffff;   /* 카드/차트 면 */
-    --primary:   #f57c00;   /* 메인 주황 */
-    --primary-d: #e65100;   /* 진한 주황 (강조) */
-    --primary-l: #ffb74d;   /* 밝은 주황 */
-    --accent:    #ffa726;   /* 보조 주황 */
-    --ink:       #3a2a1a;   /* 기본 글자 (짙은 갈색빛) */
-    --ink-soft:  #8a6d55;   /* 보조 글자 */
-    --grid:      #f0e0d0;   /* 차트 격자선 */
+    --bg:        #fff8f0;
+    --surface:   #ffffff;
+    --primary:   #f57c00;
+    --primary-d: #e65100;
+    --primary-l: #ffb74d;
+    --accent:    #ffa726;
+    --ink:       #3a2a1a;
+    --ink-soft:  #8a6d55;
+    --grid:      #f0e0d0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,11 +28,10 @@
   body {
     font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
                  system-ui, -apple-system, sans-serif;
-    background: #241a12;      /* 슬라이드 바깥 여백 색 */
+    background: #241a12;
     color: var(--ink);
   }
 
-  /* ===== 슬라이드 무대 (16:9 비율 유지, 화면 가득) ===== */
   #stage {
     position: fixed;
     inset: 0;
@@ -49,13 +43,11 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
-    /* 16:9보다 넓으면 높이 기준, 좁으면 너비 기준으로 글자 크기 스케일 */
     background: var(--bg);
     display: none;
     flex-direction: column;
     justify-content: center;
     padding: 7vh 9vw;
-    /* 폰트 크기의 기준 단위: 화면 크기에 비례 */
     font-size: clamp(16px, 2.2vh, 30px);
     animation: slideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -65,18 +57,16 @@
     to   { opacity: 1; transform: translateX(0); }
   }
 
-  /* 상단 얇은 주황 띠 (표지 제외 슬라이드의 정체성) */
   .slide::before {
     content: "";
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 8px;
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
   }
   .slide.cover::before, .slide.closing::before { display: none; }
 
-  /* ===== 공통 텍스트 요소 ===== */
-  .kicker {                     /* 슬라이드 상단의 작은 분류 라벨 */
+  .kicker {
     font-size: 0.85em;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -84,7 +74,7 @@
     text-transform: uppercase;
     margin-bottom: 0.6em;
   }
-  .headline {                   /* 슬라이드의 핵심 메시지 (한 장에 하나!) */
+  .headline {
     font-size: 2.4em;
     font-weight: 800;
     line-height: 1.25;
@@ -92,7 +82,7 @@
     word-break: keep-all;
     max-width: 20em;
   }
-  .headline .hl { color: var(--primary-d); }   /* 강조 단어 */
+  .headline .hl { color: var(--primary-d); }
   .body {
     margin-top: 0.9em;
     font-size: 1.15em;
@@ -103,11 +93,10 @@
   }
   .body strong { color: var(--primary-d); font-weight: 700; }
 
-  /* ===== 표지 ===== */
   .cover { align-items: flex-start; justify-content: center; }
   .cover .bar {
     width: 88px; height: 10px; border-radius: 6px;
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary), var(--accent));
     margin-bottom: 0.9em;
   }
   .cover .title {
@@ -121,7 +110,6 @@
     margin-top: 2.2em; font-size: 1em; color: var(--ink-soft); line-height: 1.7;
   }
 
-  /* ===== 목차 ===== */
   .toc .headline { margin-bottom: 0.8em; }
   .toc ol { list-style: none; counter-reset: toc; max-width: 26em; }
   .toc li {
@@ -138,7 +126,6 @@
     padding: 0.15em 0.5em; min-width: 2.2em; text-align: center;
   }
 
-  /* ===== 본문 + 차트 2단 레이아웃 ===== */
   .content.has-chart .inner {
     display: grid;
     grid-template-columns: 1fr 1.15fr;
@@ -158,17 +145,15 @@
   .chart-unit { font-size: 0.8em; color: var(--ink-soft); margin-bottom: 0.8em; }
   svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
 
-  /* ===== 마무리 ===== */
   .closing {
     align-items: center; text-align: center;
-    background: var(--primary-d);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-d) 100%);
     color: #fff;
   }
   .closing .big { font-size: 3em; font-weight: 900; line-height: 1.2; word-break: keep-all; }
   .closing .sub { margin-top: 0.6em; font-size: 1.4em; opacity: 0.92; }
   .closing .thanks { margin-top: 1.6em; font-size: 1.1em; opacity: 0.8; }
 
-  /* ===== 하단 진행 바 + 페이지 번호 ===== */
   #progress {
     position: fixed; bottom: 0; left: 0; height: 5px;
     background: var(--primary); z-index: 30;
@@ -180,7 +165,6 @@
     background: rgba(255,255,255,0.7); border-radius: 999px;
     padding: 3px 12px;
   }
-  .slide.closing ~ #pageno { color: #fff; }
   #hint {
     position: fixed; bottom: 14px; left: 22px; z-index: 30;
     font-size: 12px; color: var(--ink-soft); opacity: 0.65;
@@ -196,99 +180,101 @@
 
 <script>
 /* ============================================================
-   ★ 여기만 고치세요 — 슬라이드 내용 (SLIDES 배열) ★
-   ------------------------------------------------------------
-   슬라이드 종류(type):
-     'cover'   표지    : { title, subtitle, meta }
-     'toc'     목차    : { headline, items: ["...", "..."] }
-     'content' 본문    : { kicker, headline, body,   ← 핵심 메시지 하나!
-                          chart: { ... } (선택) }
-     'closing' 마무리  : { big, sub, thanks }
-
-   차트(chart) — 숫자 데이터는 표 대신 차트로!
-     { type: 'bar',  title, unit, data: [{label:'2021', value: 12}, ...] }
-     { type: 'line', title, unit, data: [{label:'1월', value: 30}, ...] }
-
-   강조: headline/body 안에서 <span class="hl">단어</span> 또는 <strong>단어</strong>
+   ★ 슬라이드 내용 (SLIDES 배열) ★
    ============================================================ */
 const SLIDES = [
   {
     type: "cover",
     title: "언젠가, 제주",
-    subtitle: "감귤나무에 열리는 소원",
-    meta: "웹 프로젝트 발표<br>신소재공학부 · 조가온",
+    subtitle: "아직 가보지 못한 그곳에, 마음을 먼저 보냅니다.",
+    meta: "아직 가보지 못한 그곳에, 마음을 먼저 보냅니다<br>조가온 · 신소재공학부",
   },
   {
     type: "toc",
-    headline: "오늘 이야기할 것",
+    headline: "목차",
     items: [
-      "프로젝트 기획과 콘셉트",
-      "사용자 경험 흐름",
-      "시스템 구조와 MBTI 필터",
+      "이 웹사이트는 무엇인가",
+      "시작 페이지 — 소원을 남기다",
+      "지도 페이지 — 소원이 지역에 쌓이다",
+      "상세 페이지 — 한 지역의 소원을 보다",
+      "어떻게 만들었나 · 마무리",
     ],
   },
   {
     type: "content",
-    kicker: "01 · 기획 의도",
-    headline: "아직 가보지 못한 그곳에,<br><span class=\"hl\">마음을 먼저 보냅니다</span>",
-    body: "\"언젠가 제주에 가면 하고 싶은 일\"을 한 줄 남기는 곳. 방문자들의 <strong>바람이 모여</strong> 하나의 풍경이 되는 감성 웹을 만들고 싶었습니다.",
+    kicker: "한 줄 소개",
+    headline: "한 줄의 소원이 감귤 하나로 <span class=\"hl\">톡</span> 열립니다",
+    body: "방문자가 <strong>“언젠가 제주에 가면 하고 싶은 일”</strong>을 한 줄 남기면 감귤이 하나 맺힙니다. 사람이 많아질수록 페이지가 감귤로 가득 차요.",
   },
   {
     type: "content",
-    kicker: "01 · 콘셉트",
-    headline: "소원 하나가 곧 <span class=\"hl\">감귤 한 개</span>입니다",
-    body: "사람이 많아질수록 감귤나무가 열매로 가득 찹니다. 제주의 맑은 바다·하늘을 배경으로, 옆에 선 <strong>돌하르방이 소원을 지키는</strong> 수호신이 됩니다.",
+    kicker: "시작 페이지",
+    headline: "제주 풍경 위에서 <span class=\"hl\">소원을 남기는</span> 첫 화면",
+    body: "한라산·유채밭·감귤나무·돌하르방이 손그림으로 깔리고,<br>‘소원 남기기’ 버튼 하나로 나이·MBTI·소원을 입력해요.",
   },
   {
     type: "content",
-    kicker: "02 · 사용자 흐름",
-    headline: "남기고 → 톡 열리고 → <span class=\"hl\">들여다봅니다</span>",
-    body: "① 나이·MBTI·소원을 입력하면 ② 감귤이 <strong>톡 열리는 애니메이션</strong>으로 나무에 맺히고 ③ 감귤을 누르면 그 사람의 소원 카드가 뜹니다.",
-  },
-  {
-    type: "content",
-    kicker: "03 · 시스템 구조",
-    headline: "서버 없이, <span class=\"hl\">스프레드시트가 데이터베이스</span>",
-    body: "정적 웹(GitHub Pages)이 <strong>Google Apps Script</strong>를 통해 <strong>스프레드시트</strong>에 소원을 저장하고 다시 불러옵니다. 별도 서버·DB 구축이 필요 없어 학생도 무료로 운영할 수 있습니다.",
-  },
-  {
-    type: "content",
-    kicker: "03 · MBTI 필터",
-    headline: "같은 <span class=\"hl\">MBTI</span>의 소원만 반짝이게",
-    body: "내 유형을 고르면 같은 MBTI의 감귤만 강조됩니다. 데이터가 쌓이면 <strong>유형별 분포</strong>도 볼 수 있습니다. (아래는 예시 데이터 — 실제 값으로 교체하세요.)",
+    kicker: "지도 페이지",
+    headline: "남긴 소원이 <span class=\"hl\">지역별로</span> 쌓여 지도가 됩니다",
+    body: "지역을 누르면 그곳에 맺힌 소원 개수가 숫자로 보입니다. 상단 스위치로 <strong>소원 지도 ↔ 맛집 지도</strong>를 전환할 수 있어요.",
     chart: {
       type: "bar",
-      title: "MBTI 유형별 소원 수 (예시)",
-      unit: "단위: 개",
+      title: "지역별 소원 개수 (예시)",
       data: [
-        { label: "INFJ", value: 9 },
-        { label: "ENFP", value: 14 },
-        { label: "INTP", value: 6 },
-        { label: "ISTJ", value: 8 },
-        { label: "ENTJ", value: 5 },
+        { label: "애월", value: 12 },
+        { label: "제주시", value: 9 },
+        { label: "서귀포", value: 7 },
+        { label: "성산", value: 6 },
+        { label: "중문", value: 4 },
       ],
     },
   },
   {
+    type: "content",
+    kicker: "지도 페이지 · 맛집 모드",
+    headline: "네이버·인스타에서 유명한 <span class=\"hl\">맛집 21곳</span>이 미리 담겨 있어요",
+    body: "한식·중식·일식·양식에 제주 특화 <strong>흑돼지·횟집·갈치집</strong>까지. 방문자가 직접 맛집을 추가하면 지역별로 함께 쌓입니다.",
+    chart: {
+      type: "bar",
+      title: "기본 맛집 카테고리 구성 (예시)",
+      unit: "단위: 곳 · 실제 값으로 교체하세요",
+      data: [
+        { label: "흑돼지", value: 6 },
+        { label: "횟집", value: 5 },
+        { label: "한식", value: 4 },
+        { label: "갈치집", value: 3 },
+        { label: "카페", value: 3 },
+      ],
+    },
+  },
+  {
+    type: "content",
+    kicker: "상세 페이지",
+    headline: "한 지역에 들어가면 <span class=\"hl\">감귤</span>로 소원이 맺힙니다",
+    body: "지역마다 그곳 테마의 배경 일러스트가 깔리고(협재 바다·성산일출봉 등), 감귤을 클릭하면 <strong>‘나이 · MBTI + 소원 내용’</strong> 카드가 떠요. 내 MBTI로 같은 유형만 반짝 강조할 수도 있어요.",
+  },
+  {
+    type: "content",
+    kicker: "추후의 확장 및 방향성",
+    headline: "다음은 <span class=\"hl\">반응을 주고받는</span> 공간으로",
+    body: "지금은 소원과 맛집을 남기는 데서 끝나요. 앞으로는 <strong>좋아요</strong>와 <strong>댓글</strong>을 더해, 누군가 추천해준 소원·맛집에 “나도 가보고 싶어요”처럼 반응을 달 수 있게 만들 계획입니다. 혼자 남기는 기록에서 <strong>함께 공감하는 지도</strong>로 넓혀갑니다.",
+  },
+  {
     type: "closing",
     big: "언젠가, 제주",
-    sub: "마음을 먼저 보내는 곳",
-    thanks: "감사합니다 · 질문을 환영합니다",
+    sub: "마음을 먼저 보내는 곳 🍊",
+    thanks: "제주대 · 감사합니다",
   },
 ];
 
 /* ============================================================
-   ↓↓↓ 아래는 슬라이드 엔진 — 보통 고칠 필요 없습니다 ↓↓↓
+   ↓↓↓ 슬라이드 엔진 — 고칠 필요 없음 ↓↓↓
    ============================================================ */
-
 const stage = document.getElementById("stage");
 const progress = document.getElementById("progress");
 const pageno = document.getElementById("pageno");
 let current = 0;
 
-/* --- HTML 이스케이프 방지: 여기서는 신뢰된 내부 데이터라 그대로 삽입 --- */
-
-/* 막대그래프 SVG 생성 */
 function barChart(chart) {
   const W = 460, H = 300, padL = 44, padR = 16, padT = 16, padB = 46;
   const data = chart.data;
@@ -298,14 +284,12 @@ function barChart(chart) {
   const gap = iw / data.length;
 
   let g = "";
-  // 가로 격자선 4개
   for (let i = 0; i <= 4; i++) {
     const y = padT + ih - (ih * i / 4);
     const val = Math.round(max * i / 4);
     g += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
     g += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" font-size="12" fill="var(--ink-soft)">${val}</text>`;
   }
-  // 막대 + 값 + 라벨
   data.forEach((d, i) => {
     const x = padL + gap * i + (gap - bw) / 2;
     const h = ih * (d.value / max);
@@ -319,7 +303,6 @@ function barChart(chart) {
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
 }
 
-/* 꺾은선그래프 SVG 생성 */
 function lineChart(chart) {
   const W = 460, H = 300, padL = 44, padR = 20, padT = 20, padB = 46;
   const data = chart.data;
@@ -335,16 +318,13 @@ function lineChart(chart) {
     g += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
     g += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" font-size="12" fill="var(--ink-soft)">${val}</text>`;
   }
-  // 면적 채우기
   let area = `M ${px(0)} ${py(data[0].value)}`;
   data.forEach((d, i) => { area += ` L ${px(i)} ${py(d.value)}`; });
   area += ` L ${px(data.length-1)} ${padT+ih} L ${px(0)} ${padT+ih} Z`;
   g += `<path d="${area}" fill="var(--primary)" opacity="0.12"/>`;
-  // 선
   let line = "";
   data.forEach((d, i) => { line += (i ? " L " : "M ") + px(i) + " " + py(d.value); });
   g += `<path d="${line}" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
-  // 점 + 값 + 라벨
   data.forEach((d, i) => {
     g += `<circle cx="${px(i)}" cy="${py(d.value)}" r="5.5" fill="#fff" stroke="var(--primary-d)" stroke-width="3"/>`;
     g += `<text x="${px(i)}" y="${py(d.value) - 14}" text-anchor="middle" font-size="13" font-weight="800" fill="var(--primary-d)">${d.value}</text>`;
@@ -362,7 +342,6 @@ function renderChart(chart) {
           </div>`;
 }
 
-/* 슬라이드 한 장을 HTML로 만들기 */
 function buildSlide(s) {
   if (s.type === "cover") {
     return `<section class="slide cover">
@@ -386,7 +365,6 @@ function buildSlide(s) {
       ${s.thanks ? `<div class="thanks">${s.thanks}</div>` : ""}
     </section>`;
   }
-  // content
   const hasChart = !!s.chart;
   const textBlock = `<div class="text">
       ${s.kicker ? `<div class="kicker">${s.kicker}</div>` : ""}
@@ -399,20 +377,17 @@ function buildSlide(s) {
   return `<section class="slide content ${hasChart ? "has-chart" : ""}">${inner}</section>`;
 }
 
-/* 전체 렌더링 */
 function render() {
   stage.innerHTML = SLIDES.map(buildSlide).join("");
   show(0);
 }
 
-/* 특정 슬라이드 보이기 */
 function show(i) {
   const slides = stage.querySelectorAll(".slide");
   current = Math.max(0, Math.min(i, slides.length - 1));
   slides.forEach((el, idx) => el.classList.toggle("active", idx === current));
   progress.style.width = ((current + 1) / slides.length * 100) + "%";
   pageno.textContent = (current + 1) + " / " + slides.length;
-  // 마무리 슬라이드에서는 페이지번호 흰색
   const isClosing = slides[current].classList.contains("closing");
   pageno.style.color = isClosing ? "#fff" : "";
   pageno.style.background = isClosing ? "rgba(255,255,255,0.18)" : "";
@@ -421,7 +396,6 @@ function show(i) {
 function next() { show(current + 1); }
 function prev() { show(current - 1); }
 
-/* 키보드 조작 */
 document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "ArrowRight": case " ": case "PageDown": next(); e.preventDefault(); break;
@@ -435,7 +409,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* 화면 좌/우 클릭으로도 넘기기 (발표 중 편의) */
 document.addEventListener("click", (e) => {
   if (e.clientX > window.innerWidth * 0.55) next();
   else if (e.clientX < window.innerWidth * 0.45) prev();
